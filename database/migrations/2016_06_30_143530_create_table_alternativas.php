@@ -21,6 +21,7 @@ class CreateTableAlternativas extends Migration
                     ->on('questoes')
                     ->onDelete('cascade');
         });
+        
     }
 
     /**
