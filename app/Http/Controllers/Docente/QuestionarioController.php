@@ -6,9 +6,15 @@ use App\Models\QuestaoTemp;
 use App\Models\Questionario;
 use App\Models\QuestionarioQuestao;
 use App\Models\Turma;
+use App\Services\QuestionarioService;
 
-class QuestionarioController extends Controller {
-
+class QuestionarioController extends Controller
+{
+    private $service;
+    
+    public function __construct(QuestionarioService $questionarioService) {
+        $this->service = $questionarioService;
+    }
     public function index()
     {
         $questionarios = Questionario::paginate(15);
@@ -42,5 +48,18 @@ class QuestionarioController extends Controller {
         $x = QuestaoTemp::where('docente_id', $idDocente)->delete();
         return redirect('docente/questionario');
         
+    }
+    
+    public function estatistica(Questionario $questionario)
+    {
+        $alunos = \App\Models\AlunoTurma::select('alunos.id', 'alunos.name','aluno_turma.aluno_id')
+                ->where('turma_id', $questionario->turma_id)->with('aluno')
+                ->join('alunos', 'aluno_turma.aluno_id', '=', 'alunos.id')
+                ->get();
+        for ($i = 0; $i < count($alunos); $i++):
+            $alunos[$i]->acertos = $this->service->getAcertoPorAluno($questionario->id, $alunos[$i]->aluno_id);
+        endfor;
+        
+        return view('docentes.questionarios.estatistica', compact('alunos', 'questionario'));
     }
 }

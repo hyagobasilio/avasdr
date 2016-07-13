@@ -3,10 +3,16 @@ namespace App\Http\Controllers\Aluno;
 use App\Http\Controllers\Controller;
 use App\Models\Questionario;
 use App\Models\QuestionarioQuestao;
-use App\Models\Resposta;
 use Illuminate\Http\Request;
+use App\Services\QuestionarioService;
 use DB;
+
 class QuestionarioController extends Controller {
+    private $service;
+    
+    public function __construct(QuestionarioService $questionarioService) {
+        $this->service = $questionarioService;
+    }
 
     public function index()
     {
@@ -19,16 +25,7 @@ class QuestionarioController extends Controller {
             })->where('vigencia', '>=', date('Y-m-d'))
               ->paginate(15);
         for($i = 0 ; $i < count($questionarios) ; $i++):
-            $quantidadeAcertos = 0;
-            $respostas = Resposta::where('questionario_id', $questionarios[$i]->id)
-                ->where('aluno_id', $alunoId)
-                ->get();
-            foreach($respostas as $resposta):
-                if($resposta->questao->resposta == $resposta->resposta):
-                    $quantidadeAcertos ++;
-                endif;
-            endforeach;
-            $questionarios[$i]->acertos = $quantidadeAcertos;
+            $questionarios[$i]->acertos = $this->service->getAcertoPorAluno($questionarios[$i]->id, $alunoId);
         endfor;
           
         return view('alunos.questionarios.index', compact('questionarios'));
@@ -56,7 +53,7 @@ class QuestionarioController extends Controller {
                 'aluno_id' => $alunoId 
               ];
         endforeach;
-        $respostasSalvas = \App\Models\Resposta::insert     ($inserts);
+        \App\Models\Resposta::insert($inserts);
         return redirect('aluno/questionario')->with('sucesso' , 'Questionário Respondido com Sucesso!' );
         
     }

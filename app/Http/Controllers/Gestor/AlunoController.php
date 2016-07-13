@@ -41,7 +41,7 @@ class AlunoController extends Controller {
             'cpf' => $data['cpf'],
             'password' => Hash::make($data['password'])
         ]);
-        return back();
+        return redirect('/aluno');
     }
     
     public function edit(Aluno $aluno)

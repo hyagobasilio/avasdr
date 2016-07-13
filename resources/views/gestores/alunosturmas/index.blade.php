@@ -127,7 +127,7 @@
                 if(idTurma != "") {
                     $.ajax({
                     dataType: "json",
-                    url: "{{url('gestor/alunos-turma/1/alunos')}}".replace("1", idTurma),
+                    url: "{{url('gestor/alunos-turma/{turma}/alunos')}}".replace("{turma}", idTurma),
                     success: function(dados) {
                             $.each( dados.alunos, function(index, value) {
                                 $('<option>', {

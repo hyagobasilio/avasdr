@@ -23,7 +23,9 @@
     <link href="{{ asset('tema/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
     <link href="{{ asset('tema/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
-
+    <!-- bootstrap-wysihtml5 -->
+    <link href="{{ asset('tema/vendors/bootstrap-wysihtml5/css/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet">
+    
     <!-- Custom Theme Style -->
     <link href="{{ asset('tema/build/css/custom.min.css') }}" rel="stylesheet">
   </head>
@@ -114,9 +116,16 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('tema/production/js/moment/moment.min.js') }}"></script>
     <script src="{{ asset('tema/production/js/datepicker/daterangepicker.js') }}"></script>
+    
+    <!-- bootstrap-wysihtml5 -->
+    <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/lib/js/prettify.js') }}"></script>
+    <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('tema/build/js/custom.min.js') }}"></script>
+     
+
     <script>
         $(document).ready(function(){
             $('.data').daterangepicker({
@@ -158,9 +167,22 @@
             singleDatePicker: true,
                 calender_style: "picker_3"
               });
+            
+
+            
+
+            
 
         });
     </script>
+    <!-- bootstrap-wysiwyg -->
+    <script>
+      $(document).ready(function() {
+          $(".editor").wysihtml5();
+      });
+    </script>
+    <!-- /bootstrap-wysiwyg -->
+
     
     @yield('script')
    

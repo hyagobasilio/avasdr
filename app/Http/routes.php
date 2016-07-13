@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:docente', 'prefix' => 'docente'], function()
     Route::get('questionario/create', 'Docente\QuestionarioController@create');
     Route::post('questionario/create', 'Docente\QuestionarioController@store');
     Route::get('questionario', 'Docente\QuestionarioController@index');
+    Route::get('questionario/{questionario}/estatistica', 'Docente\QuestionarioController@estatistica');
     
 });
 

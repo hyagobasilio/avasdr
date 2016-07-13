@@ -26,7 +26,7 @@
                         <div class="block">
                           <div class="block_content">
                             <h2 class="title">
-                                <a>{{ $q->questao->questao }}</a>
+                                <a>{!! $q->questao->questao !!}</a>
                             </h2>
                             <div class="byline">
                             <!-- <span>13 hours ago</span> by <a>Jane Smith</a>-->

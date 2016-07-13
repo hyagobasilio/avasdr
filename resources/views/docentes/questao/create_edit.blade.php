@@ -87,7 +87,7 @@
                 <!-- Resposta -->
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group {{ $errors->has('questao') ? 'bad' : '' }}">
                     <label for="questao">Questão</label>
-                    <textarea name="questao" rows="3" class="form-control">{{ old('questao')}}</textarea>
+                    <textarea id="editor" name="questao" rows="3" class="editor form-control">{{ old('questao')}}</textarea>
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('questao') !!}</li>
                     </ul>
@@ -205,7 +205,5 @@
     </div>
 </div>
 <div class="clearfix"></div>
-
-
 
 @stop
