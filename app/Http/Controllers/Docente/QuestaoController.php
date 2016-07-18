@@ -19,9 +19,8 @@ class QuestaoController extends Controller {
         return view('docentes.questao.create_edit', compact('cursos'));
     }
     
-    public function store(\Illuminate\Http\Request $request)
+    public function store(QuestaoRequest $request)
     {
-        dd($request->all());
         $letras = 'abcde';
         $dados = $request->all();
         $dados['docente_id'] = auth()->guard('docente')->user()->id;
