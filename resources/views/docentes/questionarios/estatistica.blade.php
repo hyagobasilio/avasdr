@@ -35,9 +35,11 @@
                         <tr>
                           <th scope="row">{{ $aluno->id }}</th>
                           <td>{{ $aluno->name }}</td>
-                          <td>{{ $questionario->acertos }}</td>
+                          <td>{{ $aluno->acertos }}</td>
                           <td>
-                          <?php $porcentagem =100 / $questionario->qtd_questoes * $aluno->acertos; ?>
+                          <?php  
+                          $porcentagem =100 / $questionario->qtd_questoes * $aluno->acertos;
+                          ?>
                            {{(int)$porcentagem}}% 
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" data-transitiongoal="{{ $porcentagem }}" aria-valuenow="{{ $porcentagem }}" style="width: 0%;"></div>
@@ -47,7 +49,8 @@
                         @endforeach
                       </tbody>
                     </table>
-                      
+                    
+                      Média da turma: {{ $mediaDaTurma}}
                    
 
                   </div>

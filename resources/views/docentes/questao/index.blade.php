@@ -29,7 +29,7 @@
                         @foreach($questoes as $questao)
                         <tr>
                           <th scope="row">{{ $questao->id }}</th>
-                          <td>{{ $questao->questao }}</td>
+                          <td>{!! $questao->questao !!}</td>
                           <td>{{ $questao->capacidade }}</td>
                           <td>{{ $questao->elemento_competencia }}</td>
                           <td>{{ $questao->obj_conhecimento }}</td>

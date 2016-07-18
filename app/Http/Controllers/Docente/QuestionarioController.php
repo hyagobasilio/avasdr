@@ -52,14 +52,18 @@ class QuestionarioController extends Controller
     
     public function estatistica(Questionario $questionario)
     {
+        
+        $mediaDaTurma = 0;
         $alunos = \App\Models\AlunoTurma::select('alunos.id', 'alunos.name','aluno_turma.aluno_id')
                 ->where('turma_id', $questionario->turma_id)->with('aluno')
                 ->join('alunos', 'aluno_turma.aluno_id', '=', 'alunos.id')
                 ->get();
         for ($i = 0; $i < count($alunos); $i++):
             $alunos[$i]->acertos = $this->service->getAcertoPorAluno($questionario->id, $alunos[$i]->aluno_id);
+            $mediaDaTurma += $alunos[$i]->acertos / count($questionario->qtd_questoes);
         endfor;
+        $mediaDaTurma   = count($alunos) / $mediaDaTurma;
         
-        return view('docentes.questionarios.estatistica', compact('alunos', 'questionario'));
+        return view('docentes.questionarios.estatistica', compact('alunos', 'questionario', 'mediaDaTurma'));
     }
 }

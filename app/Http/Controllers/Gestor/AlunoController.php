@@ -20,8 +20,7 @@ class AlunoController extends Controller {
     }
     
     public function store(AlunoRequest $request)
-    {
-        
+    { 
         $data = $request->all();
         /*$validator = validator($data, [
             'name' => 'required|max:255',
@@ -42,6 +41,41 @@ class AlunoController extends Controller {
             'password' => Hash::make($data['password'])
         ]);
         return redirect('/aluno');
+    }
+    public function register(\Illuminate\Http\Request $request)
+    { 
+        $data = $request->all();
+        $messages = [
+            'name.required' => 'Insira seu Nome Completo',
+            'cpf.required' => 'Insira seu CPF',
+            'email.required' => 'Insira seu Email',
+            'password.required' => 'Insira uma Senha',
+            'password.confirmed' => 'As senhas não são iguais!',
+            'password.min' => 'A senha deve ter no mínimo 6 caracteres!',
+            'cpf.min' => 'O CPF deve ter 11 caracteres!',
+            'cpf.max' => 'O CPF deve ter 11 caracteres!',
+            ];
+        
+        $validator = validator($data, [
+            'name' => 'required|min:3|max:100',
+            'cpf' => 'required|min:11|max:11',
+            'email' => 'required|email|max:100|unique:alunos',
+            'password' => 'required|min:6|confirmed',
+        ],$messages);
+        
+        if ($validator->fails()) {
+            
+            return redirect('aluno/login#signup')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+        Aluno::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'cpf' => $data['cpf'],
+            'password' => Hash::make($data['password'])
+        ]);
+        return redirect('/aluno/login')->with(['success' => 'Aluno Cadastrado com Sucesso!']);
     }
     
     public function edit(Aluno $aluno)

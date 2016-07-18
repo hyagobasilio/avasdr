@@ -25,74 +25,84 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+           <div class="clearfix"></div>
         <br>
         <form class="form-horizontal form-label-left" method="post"
 	action="@if (isset($questao)){{ url('docente/questao/' . $questao->id . '/edit') }}@else {{ url('docente/questao/create') }}@endif"
 	>
             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-        
+            
             <!-- Formulário;-->
             <div class="row">
                 <!-- curso-->
-                <div class="col-md-12 col-sm-12 col-xs-12 form-group {{ $errors->has('curso_id') ? 'bad' : '' }}">
+                <div class="col-md-3 col-sm-4 col-xs-12 form-group {{ $errors->has('curso_id') ? 'bad' : '' }}">
                     <label for="curso_id">Curso</label>
-                    
                     {!! Form::select('curso_id', $cursos, null, ['class' => 'form-control']) !!}
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('curso_id') !!}</li>
                     </ul>
                 </div>
-                <!-- Capacidade-->
-                <div class="col-md-2 col-sm-2 col-xs-2 form-group {{ $errors->has('capacidade') ? 'bad' : '' }}">
-                    <label for="capacidade">Capacidade</label>
-                    <input type="text" name="capacidade" value="{{ old('capacidade')}}" class="form-control">
+            </div>
+            <!-- Capacidade-->
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12 form-group {{ $errors->has('capacidade') ? 'bad' : '' }}">
+                    <label for="capacidade" class="">Capacidade</label>
+                        <input type="text" name="capacidade" value="{{ old('capacidade')}}" class="form-control">
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('capacidade') !!}</li>
                     </ul>
                 </div>
-                <!-- Elemento de Competencia-->
-                <div class="col-md-3 col-sm-3 col-xs-3 form-group {{ $errors->has('elemento_competencia') ? 'bad' : '' }}">
+            </div>
+            <!-- Elemento de Competencia-->
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12 form-group {{ $errors->has('elemento_competencia') ? 'bad' : '' }}">
                     <label for="elemento_competencia">Elemento de Competência</label>
                     <input type="text" name="elemento_competencia" value="{{ old('elemento_competencia')}}" class="form-control">
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('elemento_competencia') !!}</li>
                     </ul>
                 </div>
-                
+            </div>
+            <div class="row">  
                 <!-- Objeto Conhecimento-->
-                <div class="col-md-3 col-sm-3 col-xs-3 form-group {{ $errors->has('obj_conhecimento') ? 'bad' : '' }}">
+                <div class="col-md-3 col-sm-4 col-xs-12 form-group {{ $errors->has('obj_conhecimento') ? 'bad' : '' }}">
                     <label for="obj_conhecimento">Objeto Conhecimento</label>
                     <input type="text" name="obj_conhecimento" value="{{ old('obj_conhecimento')}}" class="form-control">
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('obj_conhecimento') !!}</li>
                     </ul>
                 </div>
+            </div>
+            <div class="row">
                 <!-- Dificuldade -->
-                <div class="col-md-2 col-sm-2 col-xs-2 form-group {{ $errors->has('dificuldade') ? 'bad' : '' }}">
-                    <label for="dificuldade">Dificuldade</label>
-                    <input type="text" name="dificuldade" value="{{ old('dificuldade')}}" class="form-control">
-                    <ul class="parsley-errors-list filled" id="parsley-id-5">
-                        <li class="parsley-required">{!! $errors->first('dificuldade') !!}</li>
-                    </ul>
-                </div>
                 <!-- Resposta -->
-                <div class="col-md-2 col-sm-2 col-xs-2 form-group {{ $errors->has('resposta') ? 'bad' : '' }}">
-                    <label for="resposta">Resposta</label>
-                    <?php $alternativas = ['A' => 'A', 'B' => 'B', 'C' => 'C', 'D'=>'D','E'=>'E']; ?>
-                    {!! Form::select('resposta', $alternativas, null, ['class' => 'form-control']) !!}
-                    <ul class="parsley-errors-list filled" id="parsley-id-5">
-                        <li class="parsley-required">{!! $errors->first('resposta') !!}</li>
-                    </ul>
+                <div class="col-md-6 col-sm-6 col-xs-12 {{ $errors->has('dificuldade') ? 'bad' : '' }}">
+                    <label for="dificuldade">Dificuldade</label> <br>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info">
+                            <input type="radio" name="dificuldade" id="option1" autocomplete="off" value="F" required > Fácil
+                        </label>
+                        <label class="btn btn-info">
+                            <input type="radio" name="dificuldade" id="option2" autocomplete="off" value="M"> Média
+                        </label>
+                        <label class="btn btn-info">
+                            <input type="radio" name="dificuldade" id="option3" autocomplete="off" value="D"> Difícil
+                        </label>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="row">
                 <!-- Resposta -->
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group {{ $errors->has('questao') ? 'bad' : '' }}">
                     <label for="questao">Questão</label>
-                    <textarea id="editor" name="questao" rows="3" class="editor form-control">{{ old('questao')}}</textarea>
+                    <textarea id="editor" name="questao" rows="5" class="editor form-control">{{ old('questao')}}</textarea>
                     <ul class="parsley-errors-list filled" id="parsley-id-5">
                         <li class="parsley-required">{!! $errors->first('questao') !!}</li>
                     </ul>
                 </div>
-                
+            </div>
+            <div class="row">
                 <!-- Comando -->
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group {{ $errors->has('comando') ? 'bad' : '' }}">
                     <label for="comando">Comando</label>
@@ -144,6 +154,29 @@
                         <li class="parsley-required">{!! $errors->first('alternativa-e') !!}</li>
                     </ul>
                 </div>
+                    <!-- Resposta -->
+                    <div class="col-md-6 col-sm-6 col-xs-12 {{ $errors->has('resposta') ? 'bad' : '' }}">
+                        <label for="resposta">Resposta Correta</label> <br>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-info">
+                                <input type="radio" name="resposta" id="option1" autocomplete="off" value="A" required> A
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="resposta" id="option2" autocomplete="off" value="B"> B
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="resposta" id="option3" autocomplete="off" value="C"> C
+                            </label>
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="resposta" id="option4" autocomplete="off" value="D"> D
+                            </label>
+                            </label>
+                            <label class="btn btn-info">
+                                <input type="radio" name="resposta" id="option5" autocomplete="off" value="E"> E
+                            </label>
+                        </div>
+                    </div>
                 
                 <div class="col-md-12 col-sm-12 col-xs-12">                
                     <h3>Justificativas</h3>   

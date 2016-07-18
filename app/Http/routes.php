@@ -3,9 +3,9 @@ Route::get('/docente/login', 'DocenteController@login');
 Route::post('/docente/login', 'DocenteController@postLogin');
 
 Route::get('/aluno/create', function() {
-    return view('home');
+    return view('auth.register');
 });
-Route::post('aluno/create', 'Gestor\AlunoController@store');
+Route::post('aluno/create', 'Gestor\AlunoController@register');
 
 Route::get('/aluno/login', 'AlunoController@login');
 Route::post('/aluno/login', 'AlunoController@postLogin');

@@ -3,27 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/Gestor/AlunoTurmaController.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/Docente/QuestionarioController.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/alunos/questionarios/index.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/docentes/questao/index.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/alunos/perfil.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/alunos/questionarios/questionario.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/docentes/questao/create_edit.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Models/Resposta.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/AlunoController.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/gestores/alunosturmas/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/auth/login-aluno.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/auth/template.blade.php</file>
             <file>file:/C:/xampp/htdocs/laravel-acl/app/Models/Questionario.php</file>
             <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/docentes/questionarios/estatistica.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/Aluno/QuestionarioController.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/Docente/QuestionarioController.php</file>
             <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/gestores/alunos/create_edit.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/layouts/docente/template.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Models/Questao.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/database/migrations/2016_07_08_170356_create_table_respostas.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/docentes/questionarios/index.blade.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Services/QuestionarioService.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/docentes/questao/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/Controllers/Gestor/AlunoController.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/layouts/aluno/template.blade.php</file>
+            <file>file:/C:/xampp/htdocs/laravel-acl/resources/views/home.blade.php</file>
             <file>file:/C:/xampp/htdocs/laravel-acl/app/Http/routes.php</file>
-            <file>file:/C:/xampp/htdocs/laravel-acl/app/Models/Alternativa.php</file>
         </group>
     </open-files>
 </project-private>
