@@ -32,6 +32,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="box-tools pull-right">
+            {{ $alunos->appends(Request::except('page'))->render() }}
+        </div>
     </div>
 </div>
 @endsection
