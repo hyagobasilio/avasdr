@@ -16,14 +16,11 @@ class QuestionarioController extends Controller {
 
     public function index()
     {
+        
         $alunoId = auth('aluno')->user()->id;
-        $questionarios = Questionario::whereExists(function ($query) {
-                $query->select(DB::raw(1))
-                      ->from('aluno_turma')
-                      ->whereRaw('aluno_turma.turma_id = questionarios.turma_id')
-                      ->where('aluno_turma.aluno_id', auth('aluno')->user()->id);
-            })->where('vigencia', '>=', date('Y-m-d'))
-              ->paginate(15);
+        $questionarios = $service->getQuestionariosByAluno($alunoId);
+
+
         for($i = 0 ; $i < count($questionarios) ; $i++):
             $questionarios[$i]->acertos = $this->service->getAcertoPorAluno($questionarios[$i]->id, $alunoId);
         endfor;

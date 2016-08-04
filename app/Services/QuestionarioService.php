@@ -18,4 +18,16 @@ class QuestionarioService {
             
             return $quantidadeAcertos;
    }
+
+   public function getQuestionariosByAluno($id) {
+
+      return Questionario::whereExists(function ($query) use ($id) {
+                $query->select(DB::raw(1))
+                      ->from('aluno_turma')
+                      ->whereRaw('aluno_turma.turma_id = questionarios.turma_id')
+                      ->where('aluno_turma.aluno_id', $id);
+            })
+              ->where('vigencia', '>=', date('Y-m-d'))
+              ->paginate(15);
+   }
 }
