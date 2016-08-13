@@ -49,7 +49,7 @@
                             </div>
                           </td>
                           <td>
-                              @if(!$questionario->acertos)
+                              @if($questionario->acertos == 0)
                               <a href="{{ url('aluno/questionario/'.$questionario->id.'/responder') }}">Responder</a>
                               @else
                               Respondido

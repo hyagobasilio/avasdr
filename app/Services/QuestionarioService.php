@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 use App\Models\Resposta;
+use App\Models\Questionario;
+use DB;
 
 class QuestionarioService {
     

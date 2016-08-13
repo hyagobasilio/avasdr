@@ -18,7 +18,7 @@ class QuestionarioController extends Controller {
     {
         
         $alunoId = auth('aluno')->user()->id;
-        $questionarios = $service->getQuestionariosByAluno($alunoId);
+        $questionarios = $this->service->getQuestionariosByAluno($alunoId);
 
 
         for($i = 0 ; $i < count($questionarios) ; $i++):

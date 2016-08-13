@@ -59,10 +59,12 @@ class QuestionarioController extends Controller
                 ->join('alunos', 'aluno_turma.aluno_id', '=', 'alunos.id')
                 ->get();
         for ($i = 0; $i < count($alunos); $i++):
+            //Consulta a quantidade de acertos por Aluno
             $alunos[$i]->acertos = $this->service->getAcertoPorAluno($questionario->id, $alunos[$i]->aluno_id);
-            $mediaDaTurma += $alunos[$i]->acertos / count($questionario->qtd_questoes);
+            $mediaDaTurma +=  $alunos[$i]->acertos / count($questionario->qtd_questoes) * 100;
+
         endfor;
-        $mediaDaTurma   = count($alunos) / $mediaDaTurma;
+        $mediaDaTurma   =   $mediaDaTurma / count($alunos);
         
         return view('docentes.questionarios.estatistica', compact('alunos', 'questionario', 'mediaDaTurma'));
     }
