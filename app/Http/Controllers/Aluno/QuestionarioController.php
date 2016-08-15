@@ -39,7 +39,9 @@ class QuestionarioController extends Controller {
         $dados = $request->all();
         $alunoId = auth('aluno')->user()->id;
         $questionarioId = $dados['questionario_id'];
-        
+        if ($this->service->getAcertoPorAluno($questionarioId, $alunoId) > 0 ) {
+            return redirect('aluno/questionario');
+        }
         unset($dados['questionario_id'], $dados['_token']);
         $inserts = array();
         foreach($dados as $questao => $resposta):
