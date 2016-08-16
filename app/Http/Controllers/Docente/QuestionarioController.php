@@ -17,7 +17,7 @@ class QuestionarioController extends Controller
     }
     public function index()
     {
-        $questionarios = Questionario::paginate(15);
+        $questionarios = Questionario::where('docente_id', auth('docente')->user()->id)->paginate(15);
         return view('docentes.questionarios.index', compact('questionarios'));
     }
     public function create()
