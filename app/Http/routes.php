@@ -23,6 +23,16 @@ Route::group(['middleware' => 'auth:aluno', 'prefix' => 'aluno'], function(){
 Route::group(['middleware' => 'auth:docente', 'prefix' => 'docente'], function(){
     Route::get('/', 'DocenteController@index');
     Route::get('/logout', 'DocenteController@logout');
+
+    # Files
+    Route::get('file', 'Docente\FilesController@index');
+    Route::post('file/upload', 'Docente\FilesController@upload');
+
+
+    # Posts
+    Route::get('post', 'Docente\PostsController@index');
+    Route::get('post/create', 'Docente\PostsController@create');
+
         
     # Questão
     Route::get('questao', 'Docente\QuestaoController@index');

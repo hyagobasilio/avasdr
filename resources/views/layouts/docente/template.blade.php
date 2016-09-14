@@ -28,6 +28,8 @@
     
     <!-- Custom Theme Style -->
     <link href="{{ asset('tema/build/css/custom.min.css') }}" rel="stylesheet">
+    <!-- jQuery File Upload -->
+    <link rel="stylesheet" href="/tema/vendors/jquery-file-upload/css/jquery.fileupload.css">
   </head>
 
   <body class="nav-md">
@@ -118,8 +120,7 @@
     <script src="{{ asset('tema/production/js/datepicker/daterangepicker.js') }}"></script>
     
     <!-- bootstrap-wysihtml5 -->
-    <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js') }}"></script>
-    <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/lib/js/prettify.js') }}"></script>
+    
     <script src="{{ asset('tema/vendors/bootstrap-wysihtml5/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
@@ -175,6 +176,8 @@
 
         });
     </script>
+    <script src="/tema/vendors/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="/tema/vendors/jquery-file-upload/js/jquery.fileupload.js"></script>
     <!-- bootstrap-wysiwyg -->
     <script>
       $(document).ready(function() {

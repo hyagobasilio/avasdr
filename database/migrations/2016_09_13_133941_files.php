@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Files extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('files', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+
+            $table->integer('docente_id')->unsigned()->nullable();
+            $table->foreign('docente_id')->references('id')
+                    ->on('docentes')
+                    ->onDelete('cascade');
+
+            $table->string('name');
+            $table->string('original_name');
+            $table->timestamps();
+
+            
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('files');
+    }
+}
