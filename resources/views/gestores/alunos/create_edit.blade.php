@@ -52,6 +52,17 @@
               </div>
             </div>
 
+            <div class="form-group {{ $errors->has('cpf') ? ' bad' : '' }}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  {!! Form::text('cpf', null, array('class' => 'form-control col-md-7 col-xs-12')) !!}
+                    <ul class="parsley-errors-list filled" id="parsley-id-5">
+                        <li class="parsley-required">{!! $errors->first('cpf') !!}</li>
+                    </ul>
+              </div>
+            </div>
+
             <div class="form-group {{ $errors->has('password') ? ' bad' : '' }}">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Senha<span class="required">*</span>
               </label>
