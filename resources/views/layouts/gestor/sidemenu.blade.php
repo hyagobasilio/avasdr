@@ -4,7 +4,7 @@
     <h3>General</h3>
     <ul class="nav side-menu">
         
-        <li><a><i class="fa fa-home"></i> Deivson </a></li>
+        <li><a href="{{ url('gestor/')}}"><i class="fa fa-home"></i> Dashboard </a></li>
         <li><a href="{{ url('gestor/alunos')}}"><i class="fa fa-users"></i> Alunos </a></li>
         <li><a href="{{ url('gestor/docentes')}}"><i class="fa fa-users"></i> Docentes </a></li>
         <li><a href="{{ url('gestor/materias')}}"><i class="fa fa-object-group"></i> Materias </a></li>
