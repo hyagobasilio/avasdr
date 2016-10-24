@@ -22,25 +22,13 @@ class AlunoController extends Controller {
     public function store(AlunoRequest $request)
     { 
         $data = $request->all();
-        /*$validator = validator($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-        
-        if ($validator->fails()) {
-            
-            return redirect('gestor/alunos/create')
-                    ->withErrors($validator)
-                    ->withInput();
-        } */
         Aluno::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'cpf' => $data['cpf'],
             'password' => Hash::make($data['password'])
         ]);
-        return redirect('/aluno');
+        return redirect('/gestor/alunos');
     }
     public function register(\Illuminate\Http\Request $request)
     { 
