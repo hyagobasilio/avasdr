@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>AVA SDR</title>
+    <title>AVA SDR </title>
 
     <!-- Bootstrap -->
     <link href="{{ asset('tema/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -37,7 +37,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>AVA SDR!</span></a>
+              <a href="{{ url('gestor/') }}" class="site_title"><i class="fa fa-paw"></i> <span>AVA SDR!</span></a>
             </div>
 
             <div class="clearfix"></div>
