@@ -28,13 +28,14 @@
 
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-  @foreach($posts as $post)
-
+    @foreach($posts as $post)
     <div class="x_panel">
       <div class="x_title">
         <h1>{{ $post->titulo }}</h1>
         <p>Por: {{ $post->docente->name}}<br>
-          Turma: {{ $post->turma->nome }}<br>
+          @if(!empty($post->turma))
+            Turma: {{ $post->turma->nome }}<br>
+          @endif
           Matéria: {{ $post->materia->nome }}
           <span class="right"> {{ App\Helpers\Utils::data_to_br($post->created_at) }}</span>
         </p>
@@ -45,8 +46,7 @@
         {!! $post->texto !!}
       </div> <!-- ./x_content -->
     </div> <!-- ./x_panel -->
-
-  @endforeach
+    @endforeach
   </div> <!-- ./col-md-6 -->
 </div> <!-- ./row -->
 

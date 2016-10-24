@@ -24,7 +24,7 @@
     <div class="x_content">
       <div class="clearfix"></div>
       <form class="form-horizontal form-label-left" method="post"
-	action="@if (isset($post)){{ url('docente/post/' . $post->id . '/edit') }}@else {{ url('docente/post/create') }}@endif"
+	action="@if (isset($post)){{ url('docente/post/' . $post->id . '/edit') }}@else {{ url('docente/post') }}@endif"
 	>
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
             <br>
@@ -41,7 +41,7 @@
         
           <!-- curso-->
           <div class="col-md-3 col-sm-12 col-xs-12 form-group {{ $errors->has('turma_id') ? 'bad' : '' }}">
-            <label for="turma_id">Matéria</label>
+            <label for="turma_id">Turma</label>
             {!! Form::select('turma_id', $dados['turmas'], null, ['class' => 'form-control']) !!}
             <ul class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">{!! $errors->first('turma_id') !!}</li>
@@ -70,6 +70,34 @@
             </ul>
           </div>
         </div>
+        <div id="anexos-inputs">
+          
+        </div>
+
+        <div class="row">
+
+
+          
+
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+            <br>
+            <!-- Matéria-->
+            <span class="btn btn-success fileinput-button">
+              <i class="glyphicon glyphicon-plus"></i>
+              <span>Selecionar arquivos...</span>
+              <input id="fileupload" name="documento" type="file" name="files" data-token="{!! csrf_token() !!}">
+            </span>
+
+            <br>
+            <div id="progress" class="progress">
+              <div class="progress-bar progress-bar-success" data-transitiongoal="0" aria-valuenow="0"></div>
+            </div>     
+
+          <div class="attachment">
+            <ul id="anexos">
+            </ul>
+          </div>
+        </div>
            
                 
       </div><!-- ./Formulário;-->
@@ -87,3 +115,75 @@
 <div class="clearfix"></div>
 
 @stop
+@section('script')
+<script type="text/javascript">
+  function removerAnexo(id) {
+    $.post('/docente/file/' + id + '/delete', function(data) {
+      console.log(data.result);
+    });
+    $.ajax({
+      url: '/docente/file/' + id + '/delete',
+      method: 'GET'
+    }).done(function(data) {
+      console.log(data.result);
+      $('#anexo-'+id).remove();
+    }).fail(function(data, e, erro){
+      console.log(data.responseText);
+    });
+  }
+  ;(function($){
+    'use strict';
+    $(document).ready(function(){
+      var $fileupload = $('#fileupload');
+       $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $fileupload.data('token') } });
+      
+      $fileupload.fileupload({
+        url: '/docente/post/upload',
+        dataType: 'json',
+        formData: {_token: $fileupload.data('token')},
+        done: function (e, data) {
+            $('#progress .progress-bar').css(
+                'width',
+                0 + '%'
+            ).attr('data-transitiongoal', 0);
+            console.log(data.result)
+
+             var li = '<li id="anexo-'+data.result.id+'">' +
+                '<a href="javascript:void(0)" class="atch-thumb">' +
+                  '<img src="/documentos/'+data.result.docente_id+'/' +data.result.name+'" alt="img">' +
+                '</a>'+
+                '<div class="file-name">' +
+                  data.result.original_name +
+                '</div>' +
+                '<div class="links">' +
+                  '<a href="javascript:removerAnexo('+data.result.id+')"> Excluir </a>' +
+                '</div>' + 
+              '</li>';
+              var inpt = '<input type="hidden" name="anexos[]" value="'+data.result.id+'">';
+              $('#anexos-inputs').append(inpt);
+              $('#anexos').append(li);
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+          
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            ).attr('data-transitiongoal', progress);
+        },
+        fail : function(e, data) {
+          setTimeout(function() {
+            $('#progress .progress-bar').css(
+                  'width',
+                  0 + '%'
+              ).attr('data-transitiongoal', 0);
+          }, 1500);
+          console.log('error')
+          console.log(e, data)
+        }
+    })
+
+    });
+  })(window.jQuery);
+</script>
+@endsection

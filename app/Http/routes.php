@@ -27,11 +27,14 @@ Route::group(['middleware' => 'auth:docente', 'prefix' => 'docente'], function()
     # Files
     Route::get('file', 'Docente\FilesController@index');
     Route::post('file/upload', 'Docente\FilesController@upload');
+    Route::get('file/{file}/delete', 'Docente\FilesController@destroy');
 
 
     # Posts
     Route::get('post', 'Docente\PostsController@index');
     Route::get('post/create', 'Docente\PostsController@create');
+    Route::post('post/upload', 'Docente\PostsController@upload');
+    Route::post('post', 'Docente\PostsController@store');
 
         
     # Questão

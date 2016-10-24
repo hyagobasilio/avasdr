@@ -15,7 +15,6 @@ class FilesController extends Controller {
 
 	public function upload()
 	{
-
 		/**
 		* Request related
 		*/
@@ -24,7 +23,7 @@ class FilesController extends Controller {
 		/**
 		* Storage related
 		*/
-		$storagePath = storage_path().'/documentos/'.$userId;
+		$storagePath = public_path().'/documentos/'.$userId;
 		$fileName = $file->getClientOriginalName();
 		$fileNameCustom = date('dmY-his'). str_random(4).$fileName;
 		/**
@@ -36,6 +35,14 @@ class FilesController extends Controller {
 		$fileModel->docente_id = $userId;
 		$fileModel->save();
 		return $file->move($storagePath, $fileNameCustom);
+	}
+
+	public function destroy(File $file) {
+		$localFile = public_path().'/documentos/'.auth('docente')->user()->id.'/'.$file->name;
+		
+		unlink($localFile);
+		$file->delete();
+		return 'deleted';
 	}
 
 }

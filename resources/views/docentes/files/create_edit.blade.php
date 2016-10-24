@@ -24,8 +24,8 @@
     <div class="x_content">
       <div class="clearfix"></div>
       <form class="form-horizontal form-label-left" method="post"
-	action="@if (isset($post)){{ url('docente/post/' . $post->id . '/edit') }}@else {{ url('docente/post/create') }}@endif"
-	>
+	         action=" {{ url('docente/post/create') }}"
+           >
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <br>
         <!-- Matéria-->

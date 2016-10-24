@@ -35,8 +35,11 @@ class TurmaController extends Controller {
      */
     public function postCreate(TurmaRequest $request) {
 
+        dd($request->all());
         $turma = new Turma();
         $turma->nome = $request->nome;
+        $turma->ativo = $request->has('ativo');
+
 
         if($turma->save()) {
             return redirect("/gestor/turmas");
@@ -61,6 +64,7 @@ class TurmaController extends Controller {
     public function postEdit(TurmaEditRequest $request, $id) {
         $turma = Turma::find($id);
         $turma->nome = $request->nome;
+        $turma->ativo = $request->has('ativo');
 
         if($turma->save()) {
             return redirect("/gestor/turmas/$id/edit");

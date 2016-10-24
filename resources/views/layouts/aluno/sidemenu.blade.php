@@ -6,6 +6,7 @@
         
         <li><a><i class="fa fa-home"></i> Home </a></li>
         <li><a href="{{url('aluno/questionario')}}"><i class="fa fa-edit"></i> Questinários</a></li>
+        <li><a href="{{url('aluno/post')}}" ><i class="fa fa-newspaper-o"></i> Post </a> </li>
         
     </ul>
   </div>

@@ -1,8 +1,9 @@
-<?php namespace App\Http\Requests\Gestor;
+<?php 
+namespace App\Http\Requests\Docente;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TurmaRequest extends FormRequest {
+class PostRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -11,9 +12,11 @@ class TurmaRequest extends FormRequest {
 	 */
 	public function rules()
 	{
+            
 		return [
-                    'nome' 		=> 'required|min:3',
-                    'ativo' 		=> 'required'
+                    'titulo'      	=> 'required',
+                    'materia_id'	=> 'required',
+                    'texto'			=> 'required'
 		];
 	}
 
