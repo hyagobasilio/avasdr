@@ -50,8 +50,7 @@ class MateriaController extends Controller {
      * @param $materia
      * @return Response
      */
-    public function getEdit($id) {
-        $materia = Materia::find($id);
+    public function edit(Materia $materia) {
         return view('gestores.materias.create_edit', compact('materia'));
     }
     /**
@@ -60,12 +59,12 @@ class MateriaController extends Controller {
      * @param $materia
      * @return Response
      */
-    public function postEdit(MateriaEditRequest $request, $id) {
-        $materia = Materia::find($id);
+    public function update(MateriaEditRequest $request, Materia $materia) {
+        
         $materia->nome = $request->nome;
 
-        if($materia->save()) {
-            return redirect("/gestor/materias/$id/edit");
+        if( $materia->save() ) {
+            return redirect("/gestor/materias");
         }
     }
     /**
