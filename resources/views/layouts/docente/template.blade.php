@@ -38,7 +38,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>AVA SDR!</span></a>
+              <a href="{{ url('docente/') }}" class="site_title"><i class="fa fa-paw"></i> <span>AVA SDR!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -49,7 +49,7 @@
                 <img src="{{ asset('tema/production/images/img.jpg') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bem-vindo,</span>
                 <h2>{{ auth()->guard('docente')->user()->name }}</h2>
               </div>
             </div>
