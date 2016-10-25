@@ -4,8 +4,8 @@
     <h3>General</h3>
     <ul class="nav side-menu">
         
-        <li><a><i class="fa fa-home"></i> Home </a></li>
-        <li><a href="{{url('docente/post')}}" ><i class="fa fa-newspaper-o"></i> Post </a> </li>
+        <li><a><i class="fa fa-home"></i> Dashboard </a></li>
+        <li><a href="{{url('docente/post')}}" ><i class="fa fa-newspaper-o"></i> Posts </a> </li>
         <li><a href="{{url('docente/questao')}}"><i class="fa fa-edit"></i> Questões</a></li>
         <li><a><i class="fa fa-edit"></i> Questinário <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
@@ -33,7 +33,7 @@
   <a data-toggle="tooltip" data-placement="top" title="Lock">
     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
   </a>
-  <a data-toggle="tooltip" data-placement="top" title="Logout">
+  <a href= "{{url('docente/logout')}}" data-toggle="tooltip" data-placement="top" title="Logout">
     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
   </a>
 </div>
