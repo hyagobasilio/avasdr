@@ -2,6 +2,20 @@
 
 {{-- Content --}}
 @section('content')
+        
+<div class="title_right">
+    <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search"> 
+        <div class="input-group">
+            <form>
+                <span class="input-group-btn">
+                <input class="form-control" type="text" name="name" placeholder="Pesquisa" value="{{ $nome }}">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </form>
+        </div>
+    </div>
+</div>
+
     <div class="row">
         <div class="col-md-12">
             

@@ -3,15 +3,16 @@ namespace App\Http\Controllers\Gestor;
 
 use App\Docente;
 use App\Http\Requests\Gestor\DocenteRequest;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DocenteController extends Controller {
     
-    public function index()
+    public function index(Request $request)
     {
-        $docentes = Docente::paginate(15);
-        return view('gestores.docentes.index', compact('docentes'));
+        $nome = $request->get('name');
+        $docentes = Docente::where('name', 'like', "%$nome%")->paginate(15);
+        return view('gestores.docentes.index', compact('docentes', 'nome'));
     }
     
     public function create()
