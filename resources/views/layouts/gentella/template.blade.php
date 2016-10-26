@@ -70,7 +70,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Todos os direitos reservados AVA SDR
           </div>
           <div class="clearfix"></div>
         </footer>
