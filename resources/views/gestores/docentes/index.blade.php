@@ -3,6 +3,17 @@
 {{-- Content --}}
 @section('content')
         
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="pull-right">
+            <a href="{{{ url('gestor/docentes/create') }}}"
+               class="btn btn-sm  btn-primary iframe"><span
+                        class="glyphicon glyphicon-plus-sign"></span> Novo Aluno</a>
+        </div>
+    </div>
+</div>
+
 <div class="title_right">
     <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search"> 
         <div class="input-group">
@@ -16,16 +27,6 @@
     </div>
 </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            
-            <div class="pull-right">
-                <a href="{{{ url('gestor/docentes/create') }}}"
-                   class="btn btn-sm  btn-primary iframe"><span
-                            class="glyphicon glyphicon-plus-sign"></span> Novo Aluno</a>
-            </div>
-        </div>
-    </div>
 <br>
 <div class="row">
     <div class="col_md_12">
