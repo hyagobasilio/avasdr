@@ -6,10 +6,10 @@
             
             <div class="pull-right">
                 <a href="{{{ url('gestor/materias/create') }}}"
-                   class="btn btn-sm  btn-primary iframe"><span
-                            class="glyphicon glyphicon-plus-sign"></span> Nova Matéria</a>
+                   class="btn btn-success"><span
+                            class="glyphicon glyphicon-plus-sign"></span> Nova Matéria</a>          
             </div>
-        </div>
+        </div> 
     </div>
 <br>
 <div class="row">
@@ -26,7 +26,7 @@
                 @foreach($materias as $materia)
                 <tr>
                     <td>{{$materia->nome}}</td>
-                    <td>{{$materia->id}}</td>
+                    <td><a href="{{ url('gestor/materias/'.$materia->id.'/edit') }}">Editar</a></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -72,14 +72,15 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('docentes', 'Gestor\DocenteController@index');
     Route::get('docentes/create', 'Gestor\DocenteController@create');
     Route::post('docentes/create', 'Gestor\DocenteController@store');
+
     
     #Materias
     Route::get('materias', 'Gestor\MateriaController@index');
     Route::get('materias/data', 'Gestor\MateriaController@data');
     Route::get('materias/create', 'Gestor\MateriaController@getCreate');
     Route::post('materias/create', 'Gestor\MateriaController@postCreate');
-    Route::post('materias/{id}/edit', 'Gestor\MateriaController@postEdit');
-    Route::get('materias/{id}/edit', 'Gestor\MateriaController@getEdit');
+    Route::put('materias/{materia}/edit', 'Gestor\MateriaController@update');
+    Route::get('materias/{materia}/edit', 'Gestor\MateriaController@edit');
     
     # Turmas
     Route::get('turmas', 'Gestor\TurmaController@index');
