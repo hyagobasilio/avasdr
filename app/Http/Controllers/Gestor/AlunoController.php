@@ -5,13 +5,16 @@ use App\Aluno;
 use App\Http\Requests\Gestor\AlunoRequest;
 use App\Http\Controllers\Controller;
 use Hash;
+use Illuminate\Http\Request;
 
 class AlunoController extends Controller {
     
-    public function index()
+    public function index(Request $request)
     {
-        $alunos = Aluno::paginate(15);
-        return view('gestores.alunos.index', compact('alunos'));
+        $nome = $request->get('nome');
+        
+        $alunos = Aluno::where('name','like', "%$nome%")->paginate(15);
+        return view('gestores.alunos.index', compact('alunos', 'nome'));
     }
     
     public function create()
