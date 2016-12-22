@@ -29,6 +29,13 @@
 
     <!-- Toggle -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link rel="stylesheet" type="text/css" href="/tema/vendors/select2/dist/css/select2.min.css">
+    <style type="text/css">
+        .error {
+            color: red
+        }
+    </style>
   </head>
 
   <body class="nav-md">
@@ -117,6 +124,9 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('tema/production/js/moment/moment.min.js') }}"></script>
     <script src="{{ asset('tema/production/js/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Select2 -->
+    <script type="text/javascript" src="/tema/vendors/select2/dist/js/select2.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('tema/build/js/custom.min.js') }}"></script>

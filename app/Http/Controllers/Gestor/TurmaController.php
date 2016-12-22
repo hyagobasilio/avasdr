@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Gestor;
 
 use App\Models\Turma;
+use App\Models\EstagioEducacional;
 use App\Http\Requests\Gestor\TurmaEditRequest;
 use App\Http\Requests\Gestor\TurmaRequest;
 use App\Http\Requests\Gestor\DeleteRequest;
@@ -26,7 +27,8 @@ class TurmaController extends Controller {
      * @return Response
      */
     public function getCreate() {
-        return view('gestores.turmas.create_edit');
+        $estagiosEducacionais = EstagioEducacional::pluck('nome', 'id')->prepend('Selecione');
+        return view('gestores.turmas.create_edit', compact('estagiosEducacionais'));
     }
     /**
      * Store a newly created resource in storage.
