@@ -3,7 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model
+class Escola extends Model
 {
 
     /**
@@ -11,5 +11,5 @@ class Curso extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'estagio_educacional'];
+    protected $fillable = ['nome'];
 }

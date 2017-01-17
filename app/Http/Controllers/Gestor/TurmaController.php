@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Gestor;
 
 use App\Models\Turma;
@@ -18,7 +18,7 @@ class TurmaController extends Controller {
     public function index()
     {
         $turmas = Turma::paginate(15);
-        
+
         return view('gestores.turmas.index', compact('turmas'));
     }
     /**

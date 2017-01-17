@@ -12,12 +12,19 @@ class AlterTableTurmasAddNewsColuns extends Migration
      */
     public function up()
     {
-        Schema::table('turmas', function (Blueprint $table) {
-            $table->integer('ano');
-            $table->enum('turno', ['manha', 'tarde','noite']);
-            $table->integer('estagio_educacional'); 
+      Schema::create('turnos', function(Blueprint $table){
+        $table->increments('id');
+        $table->string('nome');
+      });
+      Schema::table('turmas', function (Blueprint $table) {
+            $table->unsignedInteger('turno_id');
+            $table->unsignedInteger('estagio_educacional');
+
+            $table->foreign('turno_id')->references('id')->on('turnos');
+
             $table->foreign('estagio_educacional')
                 ->references('id')->on('estagios_educacionais');
+
         });
     }
 
@@ -28,6 +35,9 @@ class AlterTableTurmasAddNewsColuns extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('turnos');
+        Schema::table('turmas', function (Blueprint $table) {
+            $table->dropColumn(['turno_id', 'estagio_educacional']);
+        });
     }
 }

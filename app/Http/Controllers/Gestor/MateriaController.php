@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Gestor;
 
@@ -35,7 +35,7 @@ class MateriaController extends Controller {
      *
      * @return Response
      */
-    public function postCreate(MateriaRequest $request) {
+    public function store(MateriaRequest $request) {
 
         $materia = new Materia();
         $materia->nome = $request->nome;
@@ -60,7 +60,7 @@ class MateriaController extends Controller {
      * @return Response
      */
     public function update(MateriaEditRequest $request, Materia $materia) {
-        
+
         $materia->nome = $request->nome;
 
         if( $materia->save() ) {

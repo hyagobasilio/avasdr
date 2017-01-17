@@ -13,8 +13,6 @@
     <link href="{{ asset('tema/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('tema/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <!-- NProgress {{ asset('tema') }}-->
-    <link href="{{ asset('tema/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- NProgress -->
     <link href="{{ asset('tema/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
@@ -23,14 +21,16 @@
     <link href="{{ asset('tema/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
     <link href="{{ asset('tema/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
-
+    <!-- Switchery -->
+    <link href="/tema/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="/tema/vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{ asset('tema/build/css/custom.min.css') }}" rel="stylesheet">
-
     <!-- Toggle -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <!-- Select2 -->
-    <link rel="stylesheet" type="text/css" href="/tema/vendors/select2/dist/css/select2.min.css">
+    <link href="/tema/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <style type="text/css">
         .error {
             color: red
@@ -65,7 +65,7 @@
 
             @include('layouts.gestor.sidemenu')
 
-            
+
           </div>
         </div>
 
@@ -80,7 +80,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Todos os direitos reservados AVA SDR 
+            Todos os direitos reservados AVA SDR
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -126,8 +126,7 @@
     <script src="{{ asset('tema/production/js/datepicker/daterangepicker.js') }}"></script>
 
     <!-- Select2 -->
-    <script type="text/javascript" src="/tema/vendors/select2/dist/js/select2.min.js"></script>
-
+    <script src="/tema/vendors/select2/dist/js/select2.full.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('tema/build/js/custom.min.js') }}"></script>
 

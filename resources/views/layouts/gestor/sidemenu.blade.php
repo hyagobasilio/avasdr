@@ -3,11 +3,12 @@
   <div class="menu_section">
     <h3>General</h3>
     <ul class="nav side-menu">
-        
+
         <li><a href="{{ url('gestor/')}}"><i class="fa fa-home"></i> Dashboard </a></li>
         <li><a href="{{ url('gestor/alunos')}}"><i class="fa fa-users"></i> Alunos </a></li>
+        <li><a href="{{ url('gestor/cursos')}}"><i class="fa fa-graduation-cap"></i> Cursos </a></li>
         <li><a href="{{ url('gestor/docentes')}}"><i class="fa fa-users"></i> Docentes </a></li>
-        <li><a href="{{ url('gestor/materias')}}"><i class="fa fa-object-group"></i> Materias </a></li>
+        <li><a href="{{ url('gestor/materias')}}"><i class="fa fa-book"></i> Materias </a></li>
         <li><a href="{{ url('gestor/turmas')}}"><i class="fa fa-home"></i> Turmas </a></li>
         <li><a><i class="fa fa-home"></i> Relacionamentos <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
@@ -15,10 +16,11 @@
             <li><a href="{{ url('gestor/docente-materias')}}">Docente / Materias</a></li>
             <li><a href="{{ url('gestor/docente-turmas')}}">Docente / Turmas</a></li>
             <li><a href="{{ url('gestor/materias-turma')}}">Materias / Turma</a></li>
+            <li><a href="{{ url('gestor/escola-estagio-educacional')}}">Estágios / Escola</a></li>
           </ul>
         </li>
-      
-      
+
+
     </ul>
   </div>
   <div class="menu_section">
@@ -32,7 +34,7 @@
           <li><a href="contacts.html">Contacts</a></li>
           <li><a href="profile.html">Profile</a></li>
         </ul>
-      </li>                  
+      </li>
       <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
     </ul>
   </div>
