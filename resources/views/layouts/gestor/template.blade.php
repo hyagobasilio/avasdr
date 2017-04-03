@@ -31,6 +31,8 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <!-- Select2 -->
     <link href="/tema/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Colorbox -->
+    <link href="/tema/vendors/jquery-colorbox/example4/colorbox.css" rel="stylesheet">
     <style type="text/css">
         .error {
             color: red
@@ -127,11 +129,168 @@
 
     <!-- Select2 -->
     <script src="/tema/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Colorbox -->
+    <script src="/tema/vendors/jquery-colorbox/jquery.colorbox-min.js"></script>
+    <!-- Input Mask -->
+    <script src="/tema/vendors/jquery.inputmask/dist/min/inputmask/inputmask.min.js"></script>
+    <script src="/tema/vendors/jquery.inputmask/dist/min/inputmask/inputmask.extensions.min.js"></script>
+    <script src="/tema/vendors/jquery.inputmask/dist/min/inputmask/jquery.inputmask.min.js"></script>
+    <script src="/tema/vendors/bootstrap-typeahead/bootstrap-typeahead.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('tema/build/js/custom.min.js') }}"></script>
-
+    <!-- validator -->
+    <script src="/tema/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/tema/vendors/jquery-validation/dist/localization/messages_pt_BR.min.js"></script>
+    
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        //colorbox
+        $(".iframe").colorbox({
+            iframe: true,
+            width: "90%",
+            height: "90%"
+        });
+        //Adiciona o método de validar datas
+        $.validator.addMethod(
+             "date",
+             function(value, element) {
+                  var check = false;
+                  var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+                  if( re.test(value)){
+                       var adata = value.split('/');
+                       var gg = parseInt(adata[0],10);
+                       var mm = parseInt(adata[1],10);
+                       var aaaa = parseInt(adata[2],10);
+                       var xdata = new Date(aaaa,mm-1,gg);
+                       if ( ( xdata.getFullYear() == aaaa ) && ( xdata.getMonth () == mm - 1 ) && ( xdata.getDate() == gg ) )
+                            check = true;
+                       else
+                            check = false;
+                  } else
+                       check = false;
+                  return this.optional(element) || check;
+             },
+             "Insira uma data válida"
+        );
+        // Ajusta o erro ao padrão do bootstrap 3
+        $.validator.setDefaults({
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function(error, element) {
+                if(element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
 
+        $('.data').inputmask("99/99/9999");
+        $('.cpf').inputmask({mask:"99999999999", placeholder: "" });
+        $('.data-calendario').daterangepicker({
+              "format": "DD/MM/YYYY",
+               "locale": {
+                  "format": "DD/MM/YYYY",
+                  "separator": " / ",
+                  "applyLabel": "Aplicar",
+                  "cancelLabel": "Cancelar",
+                  "fromLabel": "From",
+                  "toLabel": "To",
+                  "customRangeLabel": "Custom",
+                  "weekLabel": "W",
+                  "daysOfWeek": [
+                      "D",
+                      "S",
+                      "T",
+                      "Q",
+                      "Q",
+                      "S",
+                      "S"
+                  ],
+                  "monthNames": [
+                      "Janeiro",
+                      "Fevereiro",
+                      "Março",
+                      "Abril",
+                      "Maio",
+                      "Junho",
+                      "Julho",
+                      "Agosto",
+                      "Setembro",
+                      "Outubro",
+                      "Novembro",
+                      "Dezembro"
+                  ],
+                  "firstDay": 1
+          },
+          singleDatePicker: true,
+              calender_style: "picker_3"
+            });
+
+        // AutoComplete Pai e Mãe
+        $('#pai').typeahead({
+         source: function(q, process) {
+            objects = [];
+            map = {};
+            // requisição ajax
+            return $.get("/gestor/responsavel/consulta/pai",
+                {
+                    query: q
+                }, function (data) {
+                    objects = [];
+                    $.each(data, function(i, object) {
+                        var chave = object.nome + " CPF: " + object.cpf;
+                        map[chave] = object;
+                        objects.push(chave);
+                    });
+                    return process(objects);
+                });
+            // fim ajax
+            process(objects);
+            },
+            updater: function(item)
+            {
+                $("#pai_id").val(map[item].id);
+                return item;
+            }
+        });
+        // AutoCompleteMãe
+        $('#mae').typeahead({
+         source: function(q, process) {
+            objects = [];
+            map = {};
+            // requisição ajax
+            return $.get("/gestor/responsavel/consulta/mae",
+                {
+                    query: q
+                }, function (data) {
+                    objects = [];
+                    $.each(data, function(i, object) {
+                        var chave = object.nome + " CPF: " + object.cpf;
+                        map[chave] = object;
+                        objects.push(chave);
+                    });
+                    return process(objects);
+                });
+            // fim ajax
+            process(objects);
+            },
+            updater: function(item)
+            {
+                $("#mae_id").val(map[item].id);
+                return item;
+            }
+        });
+
+      });
+    </script>
     @yield('scripts')
   </body>
 </html>

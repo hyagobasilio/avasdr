@@ -24,4 +24,14 @@ class Aluno extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function pai()
+  	{
+  		return $this->belongsTo('App\Models\Responsavel', 'pai_id');
+  	}
+
+    public function mae()
+  	{
+  		return $this->belongsTo('App\Models\Responsavel', 'mae_id');
+  	}
 }

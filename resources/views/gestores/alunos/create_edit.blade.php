@@ -22,29 +22,19 @@
     <div class="x_content">
       <br>
       @if (isset($aluno))
-      {!! Form::model($aluno, array('url' => url('gestor/alunos/' . $aluno->id . '/edit'), 'method' => 'put', 'class' => 'form-horizontal form-label-left', 'files'=> true, 'id' => 'form-aluno')) !!}
+      {!! Form::model($aluno, array('novalidate', 'url' => url('gestor/alunos/' . $aluno->id . '/edit'), 'method' => 'put', 'class' => 'form-horizontal form-label-left', 'files'=> true, 'id' => 'form-aluno')) !!}
       @else
-      {!! Form::open(array('url' => url('gestor/alunos'), 'method' => 'post', 'class' => 'form-horizontal form-label-left bf', 'files'=> true, 'id' => 'form-aluno')) !!}
+      <form class="form-horizontal form-label-left bf" action="{{url('gestor/alunos')}}" method="post" files="true" id="form-aluno" novalidate>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
       @endif
 
       <div class="form-group {{ $errors->has('name') ? ' bad' : '' }}">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nome<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          {!! Form::text('name', null, array('class' => 'form-control col-md-7 col-xs-12', 'required')) !!}
+          <input id="name" class="form-control col-md-7 col-xs-12"  name="name" placeholder="Nome Completo" required="required" type="text">
           <ul class="parsley-errors-list filled" id="parsley-id-5">
             <li class="parsley-required">{!! $errors->first('name') !!}</li>
-          </ul>
-        </div>
-      </div>
-      <!-- Data Nascimento -->
-      <div class="form-group {{ $errors->has('data_nascimento') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data Nascimento<span class="required">*</span>
-        </label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          {!! Form::text('data_nascimento', null, array('class' => 'form-control col-md-7 col-xs-12', 'required')) !!}
-          <ul class="parsley-errors-list filled" id="parsley-id-5">
-            <li class="parsley-required">{!! $errors->first('data_nascimento') !!}</li>
           </ul>
         </div>
       </div>
@@ -53,21 +43,21 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          {!! Form::text('email', null, array('class' => 'form-control col-md-7 col-xs-12', 'type' => 'email')) !!}
+          <input id="email" type="text" name="email" value="{{ old('email') }}" class="form-control col-md-7 col-xs-12">
             <ul class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">{!! $errors->first('email') !!}</li>
             </ul>
         </div>
       </div>
-      <!-- CPF -->
-      <div class="form-group {{ $errors->has('cpf') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span>
+      <!-- Confirma Email -->
+      <div class="form-group {{ $errors->has('confirm_email') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_email">Confirmar Email<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          {!! Form::text('cpf', null, array('class' => 'form-control col-md-7 col-xs-12')) !!}
-          <ul class="parsley-errors-list filled" id="parsley-id-5">
-            <li class="parsley-required">{!! $errors->first('cpf') !!}</li>
-          </ul>
+          <input type="text" name="confirm_email" value="{{ old('confirm_email') }}" class="form-control col-md-7 col-xs-12">
+            <ul class="parsley-errors-list filled" id="parsley-id-5">
+              <li class="parsley-required">{!! $errors->first('confirm_email') !!}</li>
+            </ul>
         </div>
       </div>
       <!-- Senha -->
@@ -81,17 +71,117 @@
           </ul>
         </div>
       </div>
-
-      <div class="form-group {{ $errors->has('password_confirmation') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password_confirmation">Confirmar Senha<span class="required">*</span>
+      <!-- Confirmar Senha -->
+      <div class="form-group {{ $errors->has('confirm_password') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_password">Confirmar Senha<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control col-md-7 col-xs-12" value="{{{ old('password_confirmation')}}}">
+        <input type="password" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" value="{{{ old('confirm_password')}}}">
           <ul class="parsley-errors-list filled" id="parsley-id-5">
             <li class="parsley-required">{!! $errors->first('password_confirmation') !!}</li>
           </ul>
         </div>
       </div>
+      <!-- Data Nascimento -->
+      <div class="form-group {{ $errors->has('data_nascimento') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data Nascimento<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {!! Form::text('data_nascimento', null, array('class' => 'form-control col-md-7 col-xs-12 data', 'required')) !!}
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('data_nascimento') !!}</li>
+          </ul>
+        </div>
+      </div>
+      <!-- CPF -->
+      <div class="form-group {{ $errors->has('cpf') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {!! Form::text('cpf', null, array('class' => 'form-control col-md-7 col-xs-12 cpf')) !!}
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('cpf') !!}</li>
+          </ul>
+        </div>
+      </div>
+      <!-- RG -->
+      <div class="form-group {{ $errors->has('rg') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rg">RG
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {!! Form::text('rg', null, array('class' => 'form-control col-md-7 col-xs-12')) !!}
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('rg') !!}</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Mãe -->
+      <div class="form-group {{ $errors->has('mae_id') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mae_id">Mãe<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="input-group">
+            <?php $mae = isset($aluno->mae) ? $aluno->mae->nome : null; ?>
+            {!! Form::text('mae', $mae, array('class' => 'form-control col-md-7 col-xs-12', 'autocomplete' => 'off', 'id' => 'mae')) !!}
+            <input type="hidden" name="mae_id" id="mae_id" value="@if(isset($aluno)) {{ $aluno->mae_id }} @endif">
+            <span class="input-group-btn">
+              <a href="/gestor/responsavel/create" class="btn btn-primary iframe"><i  class="glyphicon glyphicon-plus"></i></a>
+            </span>
+          </div>
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('mae_id') !!}</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Pai -->
+      <div class="form-group {{ $errors->has('pai_id') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pai_id">Pai<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="input-group">
+            <?php $pai = isset($aluno->pai) ? $aluno->pai->nome : null; ?>
+            {!! Form::text('pai', $pai, array('class' => 'form-control col-md-7 col-xs-12', 'autocomplete' => 'off', 'id' => 'pai')) !!}
+            <input type="hidden" name="pai_id" id="pai_id" value="@if(isset($aluno)) {{ $aluno->pai_id }} @endif">
+            <span class="input-group-btn">
+              <a href="/gestor/responsavel/create" class="btn btn-primary iframe"><i  class="glyphicon glyphicon-plus"></i></a>
+            </span>
+          </div>
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('pai_id') !!}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Grupo de dados do Endereço -->
+      <div class="x_title">
+        <h2>Endereço</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <!-- Endereço -->
+      <div class="form-group {{ $errors->has('endereco') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endereco">Endereço<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {!! Form::text('endereco', null, array('class' => 'form-control col-md-7 col-xs-12 endereco')) !!}
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('endereco') !!}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cidade -->
+      <div class="form-group {{ $errors->has('cidade') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cidade">Cidade<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {!! Form::text('cidade', null, array('class' => 'form-control col-md-7 col-xs-12 cidade')) !!}
+          <ul class="parsley-errors-list filled" id="parsley-id-5">
+            <li class="parsley-required">{!! $errors->first('cidade') !!}</li>
+          </ul>
+        </div>
+      </div>
+
 
       <div class="ln_solid"></div>
       <div class="form-group">
@@ -103,97 +193,56 @@
 
       </form>
     </div>
+
   </div>
 </div>
 @stop
 @section('scripts')
-<!-- <script type="text/javascript" src="/tema/vendors/jquery-validation/dist/jquery.validate.min.js"></script> -->
+
 <!-- validator -->
-<script src="/tema/vendors/validator/validator.js"></script>
-<script type="text/javascript">
+<script>
 $(function(){
 
 
-  // initialize the validator function
-  validator.message.date = 'not a real date';
 
-  // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-  $('form')
-    .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-    .on('change', 'select.required', validator.checkField)
-    .on('keypress', 'input[required][pattern]', validator.keypress);
-
-  $('.multi.required').on('keyup blur', 'input', function() {
-    validator.checkField.apply($(this).siblings().last()[0]);
-  });
-  $('form').submit(function(e) {
-    e.preventDefault();
-    var submit = true;
-
-    // evaluate the form using generic validaing
-    if (!validator.checkAll($(this))) {
-      submit = false;
+  $("#form-aluno").validate({
+    onkeyup: function(element) {$(element).valid()},
+  rules: {
+    // simple rule, converted to {required:true}
+    name: {
+      required: true,
+      minlength: 3
+    },
+    data_nascimento : {
+      date : true
+  },
+    email: {
+      required: true,
+      email: true,
+      remote : '/gestor/alunos/iscadastrado'
+    },
+    confirm_email : {
+      email: true,
+      equalTo: '#email'
+    },
+    password : {
+      minlength : 6
+    },
+    confirm_password : {
+      minlength: 6,
+      equalTo: "#password"
+    },
+    cpf : {
+      minlength : 11
     }
-
-    if (submit)
-      this.submit();
-
-    return false;
+  },
+  messages: {
+    email : {
+      remote : 'Email já cadastrado!'
+    }
+  }
   });
 });
-  /*$(function(){
-    var regras = {
-        name: {
-          required: true,
-          minlength: 3
-        },
-        email: {
-          required:true,
-          email:true
-        },
-        cpf: {
-          required:true,
-          minlength: 11,
-          maxlength: 11
-        },
-        password: {
-          required: true,
-          minlength: 5
-        },
-        password_confirmation : {
-          required: true,
-          minlength: 5,
-          equalTo: "#password"
-        },
-      };
-      if($())
-    $('#form-aluno').validate({
-      rules: regras,
-      messages : {
-        name: {
-          required: 'Preencha o campo nome!',
-          minlength: 'O nome deve ter no mínimo 3 letras'
-        },
-        email: {
-          required: 'Preencha o campo email!',
-          email: 'Email inválido!'
-        },
-        cpf: {
-          required: 'Preencha o campo cpf',
-          minlength: 'O cpf deve conter 11 numeros',
-          maxlength: 'O cpf deve conter 11 numeros',
-        },
-        password: {
-          required: 'Preenca o campo senha!',
-          minlength: 'A senha deve ter no mínimo 5 caracteres'
-        },
-        password_confirmation : {
-          required: 'Digite novamente aqui a senha!',
-          minlength: 'A senha deve ter no mínimo 5 caracteres',
-          equalTo: "#password"
-        },
-      }
-    });
-  })*/
 </script>
+<!-- /validator -->
 @endsection

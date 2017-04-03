@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Gestor;
 
 use App\Aluno;
@@ -8,22 +8,22 @@ use Hash;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller {
-    
+
     public function index(Request $request)
     {
         $nome = $request->get('nome');
-        
+
         $alunos = Aluno::where('name','like', "%$nome%")->paginate(15);
         return view('gestores.alunos.index', compact('alunos', 'nome'));
     }
-    
+
     public function create()
     {
         return view('gestores.alunos.create_edit');
     }
-    
+
     public function store(AlunoRequest $request)
-    { 
+    {
         $data = $request->all();
         Aluno::create([
             'name' => $data['name'],
@@ -34,7 +34,7 @@ class AlunoController extends Controller {
         return redirect('/gestor/alunos');
     }
     public function register(\Illuminate\Http\Request $request)
-    { 
+    {
         $data = $request->all();
         $messages = [
             'name.required' => 'Insira seu Nome Completo',
@@ -46,16 +46,16 @@ class AlunoController extends Controller {
             'cpf.min' => 'O CPF deve ter 11 caracteres!',
             'cpf.max' => 'O CPF deve ter 11 caracteres!',
             ];
-        
+
         $validator = validator($data, [
             'name' => 'required|min:3|max:100',
             'cpf' => 'required|min:11|max:11',
             'email' => 'required|email|max:100|unique:alunos',
             'password' => 'required|min:6|confirmed',
         ],$messages);
-        
+
         if ($validator->fails()) {
-            
+
             return redirect('aluno/login#signup')
                     ->withErrors($validator)
                     ->withInput();
@@ -68,7 +68,7 @@ class AlunoController extends Controller {
         ]);
         return redirect('/aluno/login')->with(['success' => 'Aluno Cadastrado com Sucesso!']);
     }
-    
+
     public function edit(Aluno $aluno)
     {
         return view('gestores.alunos.create_edit', compact('aluno'));
@@ -76,29 +76,29 @@ class AlunoController extends Controller {
     public function update(Aluno $aluno, \Illuminate\Http\Request $request )
     {
         $data = $request->all();
-        
+
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
-            
+
         ];
         if($request->has('password')){
             $rules['password'] = 'required|min:6|confirmed';
         }
-            
+
         $validator = validator($data, $rules);
-        
+
         if ($validator->fails()) {
             return redirect('gestor/alunos/create')
                     ->withErrors($validator->errors)
                     ->withInput();
         }
         $data['password'] = Hash::make($data['password']);
-        
+
         $aluno->update($data);
         return back();
     }
-    
+
     public function postEdit(TurmaEditRequest $request, $id)
     {
         $turma = Turma::find($id);
@@ -108,14 +108,14 @@ class AlunoController extends Controller {
             return redirect("/gestor/turmas/$id/edit");
         }
     }
-    
+
     public function delete(Aluno $aluno)
     {
         return view('gestores.alunos.delete', compact('aluno'));
     }
-    
+
     public function destroy(Aluno $aluno)
-    {        
+    {
         $aluno->delete();
     }
     private function validator(array $data)
@@ -125,5 +125,11 @@ class AlunoController extends Controller {
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+    }
+
+    public function isCadastrado(Request $request)
+    {
+      $rs = Aluno::where('email', $request->get('email'))->exists();
+      return response()->json(!$rs);
     }
 }

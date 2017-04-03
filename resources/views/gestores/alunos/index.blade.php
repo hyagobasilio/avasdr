@@ -4,17 +4,17 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="pull-right">
                 <a href="{{{ url('gestor/alunos/create') }}}"
-                   class="btn btn-sm  btn-primary iframe"><span
-                            class="glyphicon glyphicon-plus-sign"></span> novo Aluno</a>
+                   class="btn btn-sm  btn-primary"><span
+                            class="glyphicon glyphicon-plus-sign"></span> Novo Aluno</a>
             </div>
         </div>
     </div>
 <br>
 <div class="title_right">
-    <div class="col-md-3 col-sm-3 col-xs-3 form-group pull-right top_search"> 
+    <div class="col-md-3 col-sm-3 col-xs-3 form-group pull-right top_search">
     <div class="input-group">
     <form>
             <span class="input-group-btn">
@@ -32,7 +32,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Ações</th>
-                
+
             </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@
 @section('scripts')
     @parent
     <script type="text/javascript">
-        
+
         var oTable;
         $(document).ready(function () {
             oTable = $('#table').DataTable({
@@ -68,8 +68,8 @@
 
             });
         });
-  
 
-        
+
+
     </script>
 @endsection

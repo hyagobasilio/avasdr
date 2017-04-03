@@ -8,15 +8,17 @@
         <li><a href="{{ url('gestor/alunos')}}"><i class="fa fa-users"></i> Alunos </a></li>
         <li><a href="{{ url('gestor/cursos')}}"><i class="fa fa-graduation-cap"></i> Cursos </a></li>
         <li><a href="{{ url('gestor/docentes')}}"><i class="fa fa-users"></i> Docentes </a></li>
-        <li><a href="{{ url('gestor/materias')}}"><i class="fa fa-book"></i> Materias </a></li>
+        <li><a href="{{ url('gestor/materias')}}"><i class="fa fa-book"></i> Matérias </a></li>
+        <li><a href="{{ url('gestor/responsavel') }}"><i class="fa fa-users"></i> Responsáveis</a></li>
         <li><a href="{{ url('gestor/turmas')}}"><i class="fa fa-home"></i> Turmas </a></li>
         <li><a><i class="fa fa-home"></i> Relacionamentos <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{{ url('gestor/alunos-turma')}}">Aluno / Turma</a></li>
             <li><a href="{{ url('gestor/docente-materias')}}">Docente / Materias</a></li>
             <li><a href="{{ url('gestor/docente-turmas')}}">Docente / Turmas</a></li>
-            <li><a href="{{ url('gestor/materias-turma')}}">Materias / Turma</a></li>
+            <!-- <li><a href="{{ url('gestor/materias-turma')}}">Materias / Turma</a></li> -->
             <li><a href="{{ url('gestor/escola-estagio-educacional')}}">Estágios / Escola</a></li>
+            <li><a href="{{ url('gestor/curso-materias')}}">Curso / Materias</a></li>
           </ul>
         </li>
 

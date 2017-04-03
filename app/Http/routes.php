@@ -67,6 +67,7 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::post('alunos', 'Gestor\AlunoController@store');
     Route::get('alunos/{aluno}/edit', 'Gestor\AlunoController@edit');
     Route::put('alunos/{aluno}/edit', 'Gestor\AlunoController@update');
+    Route::get('alunos/iscadastrado', 'Gestor\AlunoController@isCadastrado');
 
     # Docente
     Route::get('docentes', 'Gestor\DocenteController@index');
@@ -121,6 +122,25 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('/escola-estagio-educacional','Gestor\EscolaEstagioEducacionalController@index');
     Route::post('escola-estagio-educacional', 'Gestor\EscolaEstagioEducacionalController@store');
     Route::get('escola-estagio-educacional/{idEscola}/estagios', 'Gestor\EscolaEstagioEducacionalController@getEstagiosRelacionados');
+
+    #Relacionamento Curso Materias
+    Route::get('curso-materias', 'Gestor\CursoMateriaController@index');
+    Route::post('curso-materias', 'Gestor\CursoMateriaController@store');
+    Route::get('curso-materias/{idCurso}/materias', 'Gestor\CursoMateriaController@getMateriasRelacionadas');
+
+    #Responsaveis
+    Route::get('responsavel/create', 'Gestor\ResponsavelController@create');
+    Route::get('responsavel', 'Gestor\ResponsavelController@index');
+    Route::put('responsavel/{responsavel}', 'Gestor\ResponsavelController@update');
+    Route::get('responsavel/{responsavel}/edit', 'Gestor\ResponsavelController@edit');
+    Route::post('responsavel', 'Gestor\ResponsavelController@store');
+    Route::get('responsavel/consulta', 'Gestor\ResponsavelController@getResponsavelForAutocomplete');
+    Route::get('responsavel/consulta/mae', 'Gestor\ResponsavelController@getMae');
+    Route::get('responsavel/consulta/pai', 'Gestor\ResponsavelController@getPai');
+    Route::get('responsavel/{responsavel}', 'Gestor\ResponsavelController@view');
+    Route::get('responsavel/{responsavel}/delete', 'Gestor\ResponsavelController@delete');
+    Route::delete('responsavel/{responsavel}', 'Gestor\ResponsavelController@destroy');
+
 });
 
 
