@@ -13,7 +13,7 @@ class Aluno extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'data_nascimento', 'pai_id', 'mae_id', 'rg', 'cpf', 'endereco'
+        'name', 'email', 'password', 'data_nascimento', 'pai_id', 'mae_id', 'rg', 'cpf', 'endereco', 'sexo'
     ];
 
     /**

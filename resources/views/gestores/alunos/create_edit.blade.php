@@ -38,6 +38,13 @@
           </ul>
         </div>
       </div>
+      <!-- Sexo -->
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sexo">Sexo <span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{ Form::select('sexo', array('' => 'Selecione', 'f' => 'Feminino', 'm' => 'Masculino'), null, ['class' => 'form-control']) }}
+        </div>
+      </div>
       <!-- Email -->
       <div class="form-group {{ $errors->has('email') ? ' bad' : '' }}">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span>
@@ -202,6 +209,7 @@ $(function(){
       required: true,
       minlength: 3
     },
+    sexo : 'required',
     data_nascimento : {
       date : true
   },

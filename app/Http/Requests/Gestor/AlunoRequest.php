@@ -16,7 +16,8 @@ class AlunoRequest extends FormRequest {
                     'name' 		=> 'required|min:3',
 										'data_nascimento' => 'required',
 										'mae' => 'required',
-                    'cpf'       => 'required|unique:alunos,cpf,'.$this->id
+                    'cpf'       => 'required|unique:alunos,cpf,'.$this->id,
+										'sexo' => 'required'
 		];
 	}
 
