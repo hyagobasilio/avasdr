@@ -29,7 +29,7 @@ class AddColumnsIntoAlunosTable extends Migration
     public function down()
     {
         Schema::table('alunos', function(Blueprint $table) {
-          $table->dropColumn(['data_nascimento', 'rg', 'endereco']);
+          $table->dropColumn(['data_nascimento', 'rg', 'endereco', 'pai_id', 'mae_id']);
         });
     }
 }
