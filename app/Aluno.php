@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Helpers\Utils;
 class Aluno extends Authenticatable
 {
     protected $table = 'alunos';
@@ -13,7 +13,7 @@ class Aluno extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'data_nascimento', 'pai_id', 'mae_id', 'rg', 'cpf', 'endereco'
     ];
 
     /**
@@ -34,4 +34,12 @@ class Aluno extends Authenticatable
   	{
   		return $this->belongsTo('App\Models\Responsavel', 'mae_id');
   	}
+
+    public function getDataNascimentoAttribute($value) {
+        return Utils::data_to_br($value);
+    }
+
+    public function setDataNascimentoAttribute($value) {
+        $this->attributes['data_nascimento'] = Utils::data_to_bd($value);
+    }
 }

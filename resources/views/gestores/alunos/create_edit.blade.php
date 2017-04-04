@@ -27,12 +27,12 @@
       <form class="form-horizontal form-label-left bf" action="{{url('gestor/alunos')}}" method="post" files="true" id="form-aluno" novalidate>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
       @endif
-
+      {{ Form::hidden('id', null,['id' => 'id']) }}
       <div class="form-group {{ $errors->has('name') ? ' bad' : '' }}">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nome<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input id="name" class="form-control col-md-7 col-xs-12"  name="name" placeholder="Nome Completo" required="required" type="text">
+          {!! Form::text('name', null, array('class' => 'form-control col-md-7 col-xs-12', 'placeholder'=>'Nome Completo')) !!}
           <ul class="parsley-errors-list filled" id="parsley-id-5">
             <li class="parsley-required">{!! $errors->first('name') !!}</li>
           </ul>
@@ -43,20 +43,9 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input id="email" type="text" name="email" value="{{ old('email') }}" class="form-control col-md-7 col-xs-12">
+          {!! Form::text('email', null, array('class' => 'form-control col-md-7 col-xs-12', 'id' => 'email')) !!}
             <ul class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">{!! $errors->first('email') !!}</li>
-            </ul>
-        </div>
-      </div>
-      <!-- Confirma Email -->
-      <div class="form-group {{ $errors->has('confirm_email') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_email">Confirmar Email<span class="required">*</span>
-        </label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" name="confirm_email" value="{{ old('confirm_email') }}" class="form-control col-md-7 col-xs-12">
-            <ul class="parsley-errors-list filled" id="parsley-id-5">
-              <li class="parsley-required">{!! $errors->first('confirm_email') !!}</li>
             </ul>
         </div>
       </div>
@@ -65,18 +54,18 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Senha<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" value="{{{ old('password') }}}">
+          {!! Form::password('password', array('class' => 'form-control col-md-7 col-xs-12', 'type' => 'password', 'id' => 'password')) !!}
           <ul class="parsley-errors-list filled" id="parsley-id-5">
               <li class="parsley-required">{!! $errors->first('password') !!}</li>
           </ul>
         </div>
       </div>
       <!-- Confirmar Senha -->
-      <div class="form-group {{ $errors->has('confirm_password') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_password">Confirmar Senha<span class="required">*</span>
+      <div class="form-group {{ $errors->has('password_confirmation') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password_confirmation">Confirmar Senha<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="password" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" value="{{{ old('confirm_password')}}}">
+        {!! Form::password('password_confirmation', array('class' => 'form-control col-md-7 col-xs-12')) !!}
           <ul class="parsley-errors-list filled" id="parsley-id-5">
             <li class="parsley-required">{!! $errors->first('password_confirmation') !!}</li>
           </ul>
@@ -117,7 +106,7 @@
       </div>
       <!-- Mãe -->
       <div class="form-group {{ $errors->has('mae_id') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mae_id">Mãe<span class="required">*</span>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mae">Mãe<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="input-group">
@@ -129,13 +118,13 @@
             </span>
           </div>
           <ul class="parsley-errors-list filled" id="parsley-id-5">
-            <li class="parsley-required">{!! $errors->first('mae_id') !!}</li>
+            <li class="parsley-required">{!! $errors->first('mae') !!}</li>
           </ul>
         </div>
       </div>
       <!-- Pai -->
-      <div class="form-group {{ $errors->has('pai_id') ? ' bad' : '' }}">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pai_id">Pai<span class="required">*</span>
+      <div class="form-group {{ $errors->has('mae') ? ' bad' : '' }}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pai_id">Pai
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="input-group">
@@ -147,7 +136,7 @@
             </span>
           </div>
           <ul class="parsley-errors-list filled" id="parsley-id-5">
-            <li class="parsley-required">{!! $errors->first('pai_id') !!}</li>
+            <li class="parsley-required">{!! $errors->first('pai') !!}</li>
           </ul>
         </div>
       </div>
@@ -219,22 +208,25 @@ $(function(){
     email: {
       required: true,
       email: true,
-      remote : '/gestor/alunos/iscadastrado'
-    },
-    confirm_email : {
-      email: true,
-      equalTo: '#email'
+      remote : {
+        url : '/gestor/alunos/iscadastrado',
+        data : {
+          email: function(){ return  $('#email').val()},
+          id: function(){ return $('#id').val()}
+        }
+      }
     },
     password : {
       minlength : 6
     },
-    confirm_password : {
+    password_confirmation : {
       minlength: 6,
       equalTo: "#password"
     },
     cpf : {
       minlength : 11
-    }
+    },
+    mae : 'required'
   },
   messages: {
     email : {

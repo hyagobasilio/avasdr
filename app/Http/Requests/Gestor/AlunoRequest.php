@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Requests\Gestor;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,9 +14,9 @@ class AlunoRequest extends FormRequest {
 	{
 		return [
                     'name' 		=> 'required|min:3',
-                    'email' 	=> 'required|email|unique:alunos',
-                    'password' 	=> 'required|confirmed|min:5',
-                    'cpf'       => 'required'
+										'data_nascimento' => 'required',
+										'mae' => 'required',
+                    'cpf'       => 'required|unique:alunos,cpf,'.$this->id
 		];
 	}
 

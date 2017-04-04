@@ -29,20 +29,28 @@
     <div class="col_md_12">
         <table id="table" class="table table-striped table-hover">
             <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Ações</th>
+              <tr>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Data Nascimento</th>
+                  <th>Ações</th>
+              </tr>
+              </thead>
+              <tbody>
+                  @foreach($alunos as $aluno)
+                  <tr>
+                      <td>{{$aluno->name}}</td>
+                      <td>{{$aluno->cpf}}</td>
+                      <td>{{ $aluno->data_nascimento}}</td>
+                      <td>
+                        <a href="{{ url('gestor/alunos/'.$aluno->id.'/edit'
+                      )}}" class=""> <span class="fa fa-edit"></span> Editar</a>
+                        <a href="{{ url('gestor/alunos/'.$aluno->id
+                      )}}" class="iframe"> <span class="fa fa-eye"></span> Visualizar</a>
 
-            </tr>
-            </thead>
-            <tbody>
-                @foreach($alunos as $aluno)
-                <tr>
-                    <td>{{$aluno->name}}</td>
-                    <td> <a href="{{ url('gestor/alunos/'.$aluno->id.'/edit'
-                    )}}">Editar</a></td>
-                </tr>
-                @endforeach
+                    </td>
+                  </tr>
+                  @endforeach
             </tbody>
         </table>
         <div class="box-tools pull-right">
