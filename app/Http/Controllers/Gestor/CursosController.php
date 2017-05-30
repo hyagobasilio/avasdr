@@ -15,6 +15,7 @@ class CursosController extends Controller {
 
   public function __construct(Curso $curso) {
     $this->curso = $curso;
+    view()->share('type', 'cursos');
   }
 
   /*
@@ -43,8 +44,8 @@ class CursosController extends Controller {
    * @return Response
    */
   public function store(CursoRequest $request) {
-    $this->curso->create($request->all());
-    return redirect("/gestor/cursos");
+    $curso = $this->curso->create($request->all());
+    return redirect("/gestor/cursos/".$curso->id.'/edit');
   }
   /**
    * Show the form for editing the specified resource.
@@ -52,9 +53,9 @@ class CursosController extends Controller {
    * @param $curso
    * @return Response
    */
-  public function edit(Curso $curso) {
-      $estagiosEducacionais = \App\Models\EstagioEducacional::pluck('nome', 'id')->prepend('Selecione');
-      return view('gestores.cursos.create_edit', compact('curso', 'estagiosEducacionais'));
+  public function edit(Curso $curso)
+  {
+      return view('gestores.cursos.create_edit', compact('curso'));
   }
   /**
    * Update the specified resource in storage.
@@ -64,7 +65,7 @@ class CursosController extends Controller {
    */
   public function update(CursoRequest $request, Curso $curso) {
     $curso->update($request->all());
-    return redirect("/gestor/cursos");
+    return redirect("/gestor/cursos/".$curso->id.'/edit');
 
   }
   /**
@@ -104,5 +105,20 @@ class CursosController extends Controller {
 
       return response()->json($dados);
 
+  }
+  public function data()
+  {
+   $selects = array(
+      'cursos.id',
+      'cursos.nome'
+      );
+
+    $cargos = $this->curso->select($selects);
+
+    return Datatables::of($cargos)
+    ->add_column('actions', '<a href="/gestor/cursos" class="btn btn-success btn-xs iframe" ><span class="glyphicon glyphicon-pencil"></span></a>'
+            .'<a href="/gestor/cursos" class="btn btn-xs btn-success iframe"><span class="glyphicon glyphicon-trash"></span></a>'
+        )
+    ->make();
   }
 }

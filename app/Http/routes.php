@@ -116,7 +116,8 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('cursos/create', 'Gestor\CursosController@create');
     Route::post('cursos', 'Gestor\CursosController@store');
     Route::get('cursos/{curso}/edit', 'Gestor\CursosController@edit');
-    Route::put('cursos/{curso}/edit', 'Gestor\CursosController@update');
+    Route::put('cursos/{curso}', 'Gestor\CursosController@update');
+    Route::get('cursos/data', 'Gestor\CursosController@data');
 
     #Relacionamento Escola Estágio Educacional
     Route::get('/escola-estagio-educacional','Gestor\EscolaEstagioEducacionalController@index');
@@ -140,6 +141,28 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('responsavel/{responsavel}', 'Gestor\ResponsavelController@view');
     Route::get('responsavel/{responsavel}/delete', 'Gestor\ResponsavelController@delete');
     Route::delete('responsavel/{responsavel}', 'Gestor\ResponsavelController@destroy');
+
+    # Série
+    Route::get('serie/create/{curso}', 'Gestor\SerieController@create');
+    Route::post('serie', 'Gestor\SerieController@store');
+    Route::get('serie/data/{curso}', 'Gestor\SerieController@data');
+    Route::get('serie/{serie}/edit', 'Gestor\SerieController@edit');
+    Route::get('serie/{model}/delete', 'Gestor\SerieController@delete');
+    Route::put('serie/{serie}', 'Gestor\SerieController@update');
+    Route::delete('serie/{serie}', 'Gestor\SerieController@destroy');
+
+    #Matriz
+    Route::get('matriz', 'Gestor\MatrizController@index');
+    Route::get('matriz/create', 'Gestor\MatrizController@create');
+    Route::post('matriz', 'Gestor\MatrizController@store');
+    Route::get('matriz/data', 'Gestor\MatrizController@data');
+    Route::get('matriz/{matriz}/edit', 'Gestor\MatrizController@edit');
+    Route::put('matriz/{matriz}', 'Gestor\MatrizController@update');
+
+    # Matriz Itens
+    Route::get('matriz-itens/{matriz}/create', 'Gestor\MatrizItensController@create');
+    Route::get('matriz-itens/data/{matriz}', 'Gestor\MatrizItensController@data');
+    Route::post('matriz-itens', 'Gestor\MatrizItensController@store');
 
 });
 

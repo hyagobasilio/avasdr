@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CursoRequest extends FormRequest {
+class MatrizRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,9 +12,16 @@ class CursoRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'codigo'								=> 'required|unique:cursos,codigo,'.$this->id,
+			'codigo'							=> 'required|unique:matriz,codigo,'.$this->id.',id',
 			'nome'								=> 'required|min:3',
-			'carga_horaria'								=> 'required|numeric',
+			'curso_id'						=> 'required',
+		];
+	}
+
+	public function messages()
+	{
+		return [
+			'curso_id.required' => 'O campo curso é obrigatório.'
 		];
 	}
 

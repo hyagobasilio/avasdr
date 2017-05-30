@@ -189,6 +189,88 @@
               calender_style: "picker_3"
             });
 
+            $('form').submit(function (event) {
+              if ($(this).valid()) {
+
+                $('.has-error').removeClass('has-error');
+                $('.help-block').remove();
+                event.preventDefault();
+                var form = $(this);
+
+                if (form.attr('id') == '' || form.attr('files') != false) {
+                  $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize()
+                  }).success(function (data) {
+                    setTimeout(function () {
+
+                      parent.$.colorbox.close();
+                    }, 10);
+                  }).fail(function (jqXHR, textStatus, errorThrown) {
+                    // Optionally alert the user of an error here...
+                    if (jqXHR.status == 403 ) {
+                      alert('Não autorizado');
+                      setTimeout(function () {
+                        parent.$.colorbox.close();
+                      }, 10);
+
+                    }
+                    var textResponse = jqXHR.responseText;
+                    var alertText = "";
+                    console.log(textResponse)
+                    var jsonResponse = jQuery.parseJSON(textResponse);
+
+                    $.each(jsonResponse, function (n, elem) {
+                      $.each(elem, function(index, message) {
+                        alertText = alertText +  message + "\n";
+                        $("input[name='"+n+"']").parent().addClass('has-error');
+                        $("input[name='"+n+"']").parent().append('<span class="help-block">'+message+'</span>');
+                      });
+                      /*
+                      $("input[name='"+elem.campo+"']").parent().addClass('has-error');
+                      $("input[name='"+elem.campo+"']").parent().append('<span class="help-block">'+elem.mensagem+'</span>');*/
+                    });
+                    alert(alertText);
+                  });
+                }
+                else {
+                  var formData = new FormData(this);
+
+                  $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                  }).success(function (data) {
+
+                    setTimeout(function () {
+                      parent.$.colorbox.close();
+                    }, 10);
+
+                  }).fail(function (jqXHR, textStatus, errorThrown) {
+                    // Optionally alert the user of an error here...
+                    var textResponse = jqXHR.responseText;
+                    var alertText = "Erro de validação :\n\n";
+                    var jsonResponse = jQuery.parseJSON(textResponse);
+
+                    $.each(jsonResponse.error, function (n, elem) {
+
+                      $("input[name='"+elem.campo+"']").parent().addClass('has-error');
+                      $("input[name='"+elem.campo+"']").parent().append('<span class="help-block">'+elem.mensagem+'</span>')
+                      //alertText = alertText + elem + "\n";
+                    });
+
+                    alert(alertText);
+                  });
+                }
+                ;
+              }//if valid
+          });
+
       });
     </script>
     @yield('scripts')

@@ -9,6 +9,10 @@ use Auth;
 
 class GestorController extends Controller
 {
+    public function __constructor()
+    {
+      view()->share('type', 'gestor');
+    }
     public function index()
     {
         return view('gestores.index');
@@ -20,15 +24,15 @@ class GestorController extends Controller
     public function postLogin(Request $request)
     {
         $data = $request->all();
-       
+
         $validator = validator($data, [
             'email' => 'required|email|max:255',
             'password' => 'required|min:6',
         ]);
-        
-        if ($validator->fails()) 
+
+        if ($validator->fails())
         {
-            
+
             return redirect('/gestor/login')->withErrors($validator)
                     ->withInput();
         }
@@ -40,9 +44,9 @@ class GestorController extends Controller
             return redirect('/gestor/login')->withErrors(['errors' => 'Login Inválido!'])
                     ->withInput();
         }
-        
+
     }
-    
+
     public function logout()
     {
         auth()->guard('gestor')->logout();

@@ -7,7 +7,7 @@
 
             <div class="pull-right">
                 <a href="{{{ url('gestor/alunos/create') }}}"
-                   class="btn btn-sm  btn-primary"><span
+                   class="btn btn-success"><span
                             class="glyphicon glyphicon-plus-sign"></span> Novo Aluno</a>
             </div>
         </div>
@@ -67,12 +67,7 @@
 
         var oTable;
         $(document).ready(function () {
-            oTable = $('#table').DataTable({
-                "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-                "sPaginationType": "full_numbers",
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{{ URL::to('admin/turmas/data/') }}",
+
 
             });
         });

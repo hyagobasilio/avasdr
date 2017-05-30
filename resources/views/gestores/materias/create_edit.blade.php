@@ -1,4 +1,4 @@
-@extends('layouts.gestor.template')
+@extends('layouts.modalcolorbox')
 
 @section('content')
 
@@ -22,7 +22,7 @@
         @else
         {!! Form::open(array('url' => url('gestor/materias'), 'method' => 'post', 'class' => 'form-horizontal bf', 'files'=> true)) !!}
         @endif
-        
+
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>

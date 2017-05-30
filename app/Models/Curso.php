@@ -11,5 +11,10 @@ class Curso extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'estagio_educacional'];
+    protected $fillable = ['nome', 'carga_horaria', 'codigo'];
+
+    public function series()
+    {
+      return $this->hasMany('App\Models\Serie');
+    }
 }

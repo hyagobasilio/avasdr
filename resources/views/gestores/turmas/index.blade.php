@@ -4,10 +4,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="pull-right">
                 <a href="{{{ url('gestor/turmas/create') }}}"
-                   class="btn btn-sm  btn-primary iframe"><span
+                   class="btn btn-success"><span
                             class="glyphicon glyphicon-plus-sign"></span> Nova Turma</a>
             </div>
         </div>
@@ -15,7 +15,7 @@
 <br>
 <div class="row">
     <div class="col_md_12">
-        
+
         <table id="table" class="table table-striped table-hover">
             <thead>
             <tr>
@@ -40,7 +40,7 @@
 @section('scripts')
     @parent
     <script type="text/javascript">
-        
+
         var oTable;
         $(document).ready(function () {
             oTable = $('#table').DataTable({
@@ -52,8 +52,8 @@
 
             });
         });
-  
 
-        
+
+
     </script>
 @endsection

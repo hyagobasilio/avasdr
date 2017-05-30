@@ -33,6 +33,15 @@
     <link href="/tema/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <!-- Colorbox -->
     <link href="/tema/vendors/jquery-colorbox/example4/colorbox.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="/tema/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/tema/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/tema/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/tema/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/tema/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <link href="/tema/build/css/custom.min.css" rel="stylesheet">
+
     <style type="text/css">
         .error {
             color: red
@@ -141,7 +150,24 @@
     <!-- validator -->
     <script src="/tema/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/tema/vendors/jquery-validation/dist/localization/messages_pt_BR.min.js"></script>
-    
+    <!-- Datatables -->
+    <script src="/tema/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/tema/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/tema/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/tema/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/tema/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/tema/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/tema/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/tema/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/tema/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/tema/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/tema/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/tema/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="/tema/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/tema/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/tema/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
       $(document).ready(function(){
@@ -286,6 +312,48 @@
             {
                 $("#mae_id").val(map[item].id);
                 return item;
+            }
+        });
+
+        <?php $type = isset($type) ? $type : '';?>
+        var oTable;
+        oTable = $('#table-data').DataTable({
+            "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sProcessing": "Processando",
+                "sLengthMenu": "",
+                "sZeroRecords": "Nenhum resultado",
+                "sInfo": "",
+                "sEmptyTable": "Tabela vazia",
+                "sInfoEmpty": "Vazio",
+                "sInfoFiltered": "Filtro",
+                "sInfoPostFix": "",
+                "sSearch": "Pesquisar:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Inicio",
+                    "sPrevious": "Anterior",
+                    "sNext": "Próximo",
+                    "sLast": "Último"
+                }
+            },
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url('gestor/'.$type.'/data') }}",
+            "fnDrawCallback": function (oSettings) {
+
+
+
+                $(".iframe").colorbox({
+                    iframe: true,
+                    width: "90%",
+                    height: "90%",
+                    onClosed: function () {
+                        oTable.ajax.reload();
+                    }
+                });
+
             }
         });
 
