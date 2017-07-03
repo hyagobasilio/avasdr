@@ -47,6 +47,7 @@
             color: red
         }
     </style>
+    @yield('head')
   </head>
 
   <body class="nav-md">

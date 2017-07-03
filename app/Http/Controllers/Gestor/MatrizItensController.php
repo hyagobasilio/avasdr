@@ -65,11 +65,10 @@ class MatrizItensController extends Controller {
    * @param $curso
    * @return Response
    */
-  public function delete(Curso $curso)
+  public function delete(MatrizItens $matrizItem)
   {
-
     // Show the page
-    return view('gestores.cursos.delete', compact('curso'));
+    return view('gestores.matriz-itens.delete', compact('matrizItem'));
   }
   /**
    * Remove the specified resource from storage.
@@ -77,9 +76,9 @@ class MatrizItensController extends Controller {
    * @param $curso
    * @return Response
    */
-  public function destroy(Curso $curso)
+  public function destroy(MatrizItens $matrizItem)
   {
-    $curso->delete();
+    $matrizItem->delete();
   }
 
 
@@ -97,7 +96,7 @@ class MatrizItensController extends Controller {
 
     return Datatables::of($matriz)
     ->add_column('actions', '<a href="/gestor/matriz/{{$id}}/edit"><span class="fa fa-edit"></span> Editar</a> '
-    .'<a href="/gestor/matriz/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Excluir</a>')
+    .'<a href="/gestor/matriz-itens/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Excluir</a>')
     ->remove_column('id')
     ->make();
   }

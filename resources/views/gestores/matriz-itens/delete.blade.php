@@ -1,6 +1,6 @@
 @extends('layouts.modalcolorbox')
 @section('content')
-{!! Form::model($model, array('url' => url('gestor/serie') . '/' . $model->id, 'method' => 'delete', 'class' => 'bf', 'files'=> true)) !!}
+{!! Form::model($matrizItem, array('url' => url('gestor/matriz-itens') . '/' . $matrizItem->id, 'method' => 'delete', 'class' => 'bf', 'files'=> true)) !!}
 	<div class="form-group">
 		<div class="controls">
 			<p>Tem certeza que deseja deletar?</p>

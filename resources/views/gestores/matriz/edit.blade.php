@@ -178,7 +178,7 @@ function atualizaCargaHorariaDisponivel()
                 height: "90%",
                 onClosed: function () {
                     oTable.ajax.reload();
-                    atualizaCargaHorariaDisponivel();
+                    setTimeOut(atualizaCargaHorariaDisponivel, 2000);
                 }
             });
 

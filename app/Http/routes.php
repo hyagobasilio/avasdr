@@ -163,6 +163,8 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('matriz-itens/{matriz}/create', 'Gestor\MatrizItensController@create');
     Route::get('matriz-itens/data/{matriz}', 'Gestor\MatrizItensController@data');
     Route::post('matriz-itens', 'Gestor\MatrizItensController@store');
+    Route::get('matriz-itens/{matrizItem}/delete', 'Gestor\MatrizItensController@delete');
+    Route::delete('matriz-itens/{matrizItem}', 'Gestor\MatrizItensController@destroy');
 
 });
 
