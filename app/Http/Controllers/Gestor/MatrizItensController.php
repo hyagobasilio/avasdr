@@ -91,6 +91,7 @@ class MatrizItensController extends Controller {
   {
     $selects = [
       'matriz_itens.id',
+      'materias.codigo',
       'materias.nome',
       'matriz_itens.carga_horaria'
     ];
@@ -101,8 +102,7 @@ class MatrizItensController extends Controller {
     ->orderBy('nome', 'asc');
 
     return Datatables::of($matriz)
-    ->add_column('actions', '<a href="/gestor/matriz/{{$id}}/edit"><span class="fa fa-edit"></span> Editar</a> '
-    .'<a href="/gestor/matriz-itens/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Excluir</a>')
+    ->add_column('actions', '<a href="/gestor/matriz-itens/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Excluir</a>')
     ->remove_column('id')
     ->make();
   }

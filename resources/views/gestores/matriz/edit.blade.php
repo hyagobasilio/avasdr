@@ -99,6 +99,7 @@
       <table id="table" class="table table-striped table-hover">
         <thead>
           <tr>
+            <th>Código</th>
             <th>Nome</th>
             <th>C.H.</th>
             <th>Ações</th>
@@ -122,7 +123,7 @@ var cargaHorariaUtilizada = 0;
 function atualizaCargaHorariaDisponivel()
 {
   cargaHorariaUtilizada =0;
-  $("#table tbody tr:visible td:nth-child(2)").each(function () {
+  $("#table tbody tr:visible td:nth-child(3)").each(function () {
         cargaHorariaUtilizada += parseInt($(this).text());
   });
 
@@ -133,10 +134,12 @@ function atualizaCargaHorariaDisponivel()
     jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
       return this.flatten().reduce( function ( a, b ) {
         if ( typeof a === 'string' ) {
-          a = a.replace(/[^\d.-]/g, '') * 1;
+          a = a.replace(/[^\d.-]/g, '') * 2;
+          console.log(a)
         }
         if ( typeof b === 'string' ) {
-          b = b.replace(/[^\d.-]/g, '') * 1;
+          console.log(b)
+          b = b.replace(/[^\d.-]/g, '') * 2;
         }
 
         return a + b;
@@ -179,6 +182,7 @@ function atualizaCargaHorariaDisponivel()
                 height: "90%",
                 onClosed: function () {
                     oTable.ajax.reload();
+                    oTable.sum();
                     setTimeout(atualizaCargaHorariaDisponivel, 2000);
                 }
             });

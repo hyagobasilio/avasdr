@@ -12,7 +12,8 @@ class MateriaRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-                    'nome' 		=> 'required|min:3',
+			'codigo'	=> 'required|unique:materias,codigo,'.$this->id.',id',
+      'nome' 		=> 'required|min:3',
 		];
 	}
 

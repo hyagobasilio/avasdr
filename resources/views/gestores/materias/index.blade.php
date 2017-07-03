@@ -18,6 +18,7 @@
         <table id="table-data" class="table table-striped table-hover">
             <thead>
             <tr>
+                <th>Código</th>
                 <th>Nome</th>
                 <th>Ações</th>
             </tr>

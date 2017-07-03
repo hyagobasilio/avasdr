@@ -40,14 +40,10 @@ class MateriaController extends Controller {
    *
    * @return Response
    */
-  public function store(MateriaRequest $request) {
-
-      $materia = new Materia();
-      $materia->nome = $request->nome;
-
-      if($materia->save()) {
-          return redirect("/gestor/materias");
-      }
+  public function store(MateriaRequest $request)
+  {
+    $materia = Materia::create($request->all());S
+    return redirect("/gestor/materias");
   }
   /**
    * Show the form for editing the specified resource.
@@ -64,13 +60,10 @@ class MateriaController extends Controller {
    * @param $materia
    * @return Response
    */
-  public function update(MateriaEditRequest $request, Materia $materia) {
-
-      $materia->nome = $request->nome;
-
-      if( $materia->save() ) {
-          return redirect("/gestor/materias");
-      }
+  public function update(MateriaRequest $request, Materia $materia)
+  {
+    $materia->update($request->all());
+    return redirect("/gestor/materias");
   }
   /**
    * Remove the specified resource from storage.
@@ -102,13 +95,13 @@ class MateriaController extends Controller {
    */
   public function data()
   {
-      $materias = Materia::select(array('materias.id','materias.nome'));
-      return Datatables::of($materias)
-          ->add_column('actions', '<a href="/gestor/materias/{{$id}}/edit" class="iframe" ><span class="fa fa-edit"></span>  Editar</a>
-                  <a href="/gestor/materias/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Deletar</a>
-             ')
-          ->remove_column('id')
-          ->make();
+    $materias = Materia::select(array('id','codigo', 'nome'));
+    
+    return Datatables::of($materias)
+    ->add_column('actions', '<a href="/gestor/materias/{{$id}}/edit" class="iframe" ><span class="fa fa-edit"></span>  Editar</a>
+            <a href="/gestor/materias/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Deletar</a>')
+    ->remove_column('id')
+    ->make();
   }
 
   public function getMateriasProfessorTurma($idProfessor, $idTurma)
