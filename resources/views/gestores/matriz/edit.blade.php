@@ -112,6 +112,7 @@
     </div>
   </div>
 </div>
+<div class="clearfix">
 @endif
 @endsection
 
@@ -178,7 +179,7 @@ function atualizaCargaHorariaDisponivel()
                 height: "90%",
                 onClosed: function () {
                     oTable.ajax.reload();
-                    setTimeOut(atualizaCargaHorariaDisponivel, 2000);
+                    setTimeout(atualizaCargaHorariaDisponivel, 2000);
                 }
             });
 

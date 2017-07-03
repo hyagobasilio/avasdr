@@ -26,7 +26,12 @@ class MatrizItensController extends Controller {
    */
   public function create(Matriz $matriz)
   {
-    $disciplinas = Materia::pluck('nome', 'id')->prepend('Selecione', '');
+    $materiasJaCadastradas = $matriz->itens()->pluck('materia_id')->toArray();
+    //dd($itensDaMatrizJaCadastradas);
+    $disciplinas = Materia::whereNotIn('id', $materiasJaCadastradas)
+    ->pluck('nome', 'id')
+    ->prepend('Selecione', '');
+
     return view('gestores.matriz-itens.create_edit', compact('matriz', 'disciplinas'));
   }
   /**
@@ -92,7 +97,8 @@ class MatrizItensController extends Controller {
 
     $matriz = $this->matrizItens->select($selects)
     ->join('materias', 'matriz_itens.materia_id', '=', 'materias.id')
-    ->where('matriz_id', $matriz->id);
+    ->where('matriz_id', $matriz->id)
+    ->orderBy('nome', 'asc');
 
     return Datatables::of($matriz)
     ->add_column('actions', '<a href="/gestor/matriz/{{$id}}/edit"><span class="fa fa-edit"></span> Editar</a> '
