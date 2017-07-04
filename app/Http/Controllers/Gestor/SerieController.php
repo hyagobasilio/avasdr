@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Gestor;
 use App\Http\Controllers\Controller;
 use App\Models\Curso;
 use App\Models\Serie;
-use App\Http\Requests\Gestor\CursoEditRequest;
-use App\Http\Requests\Gestor\CursoRequest;
+use App\Http\Requests\Gestor\SerieRequest;
 use App\Http\Requests\Gestor\DeleteRequest;
 use Datatables;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +43,7 @@ class SerieController extends Controller {
    *
    * @return Response
    */
-  public function store(CursoRequest $request) {
+  public function store(SerieRequest $request) {
     Serie::create($request->all());
   }
   /**
@@ -64,7 +63,7 @@ class SerieController extends Controller {
    * @param $curso
    * @return Response
    */
-  public function update(CursoRequest $request, Serie $serie) {
+  public function update(SerieRequest $request, Serie $serie) {
     $serie->update($request->all());
     return redirect("/gestor/cursos/".$serie->curso_id.'/edit');
 
@@ -91,11 +90,11 @@ class SerieController extends Controller {
     $serie->delete();
   }
 
-  public function data()
+  public function data(Curso $curso)
   {
-    $selects = ['series.id', 'series.nome'];
-    $cargos = $this->serie->select($selects);
-    return Datatables::of($cargos)
+    $series = $curso->series;
+    return Datatables::of($series)
+      ->remove_column('curso_id')
       ->add_column('actions', '<a href="/gestor/serie/{{$id}}/edit" class="iframe"><span class="fa fa-edit"></span> Editar</a> '
       .'<a href="/gestor/serie/{{$id}}/delete" class="iframe"><span class="fa fa-trash"></span> Excluir</a>')
       ->make();

@@ -115,9 +115,11 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('cursos', 'Gestor\CursosController@index');
     Route::get('cursos/create', 'Gestor\CursosController@create');
     Route::post('cursos', 'Gestor\CursosController@store');
+    Route::get('cursos/{model}/delete', 'Gestor\CursosController@delete');
     Route::get('cursos/{curso}/edit', 'Gestor\CursosController@edit');
     Route::put('cursos/{curso}', 'Gestor\CursosController@update');
     Route::get('cursos/data', 'Gestor\CursosController@data');
+    Route::delete('cursos/{curso}', 'Gestor\CursosController@destroy');
 
     #Relacionamento Escola Estágio Educacional
     Route::get('/escola-estagio-educacional','Gestor\EscolaEstagioEducacionalController@index');

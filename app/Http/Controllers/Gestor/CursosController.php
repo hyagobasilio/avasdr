@@ -35,8 +35,8 @@ class CursosController extends Controller {
    * @return Response
    */
   public function create() {
-    $estagiosEducacionais = \App\Models\EstagioEducacional::pluck('nome', 'id')->prepend('Selecione');
-    return view('gestores.cursos.create_edit', compact('estagiosEducacionais'));
+    //$estagiosEducacionais = \App\Models\EstagioEducacional::pluck('nome', 'id')->prepend('Selecione');
+    return view('gestores.cursos.create_edit');
   }
   /**
    * Store a newly created resource in storage.
@@ -74,11 +74,11 @@ class CursosController extends Controller {
    * @param $curso
    * @return Response
    */
-  public function delete(Curso $curso)
+  public function delete(Curso $model)
   {
 
     // Show the page
-    return view('gestores.cursos.delete', compact('curso'));
+    return view('gestores.cursos.delete', compact('model'));
   }
   /**
    * Remove the specified resource from storage.
@@ -106,18 +106,21 @@ class CursosController extends Controller {
       return response()->json($dados);
 
   }
+  
   public function data()
   {
    $selects = array(
       'cursos.id',
+      'cursos.codigo',
       'cursos.nome'
       );
 
     $cargos = $this->curso->select($selects);
 
     return Datatables::of($cargos)
-    ->add_column('actions', '<a href="/gestor/cursos" class="btn btn-success btn-xs iframe" ><span class="glyphicon glyphicon-pencil"></span></a>'
-            .'<a href="/gestor/cursos" class="btn btn-xs btn-success iframe"><span class="glyphicon glyphicon-trash"></span></a>'
+    ->remove_column('id')
+    ->add_column('actions', '<a href="/gestor/cursos/{{$id}}/edit" ><span class="glyphicon glyphicon-pencil"></span> Editar</a> '
+            .'<a href="/gestor/cursos/{{$id}}/delete" class="iframe"><span class="glyphicon glyphicon-trash"></span> Deletar</a>'
         )
     ->make();
   }

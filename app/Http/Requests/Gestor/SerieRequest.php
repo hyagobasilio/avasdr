@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CursoRequest extends FormRequest {
+class SerieRequest extends FormRequest {
 
 	/**
 	 * Get the validation rules that apply to the request.
@@ -12,9 +12,7 @@ class CursoRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'codigo'								=> 'required|unique:cursos,codigo,'.$this->id,
-			'nome'								=> 'required|min:3',
-			'carga_horaria'								=> 'required|numeric|min:1',
+			'nome' => 'required|min:3'
 		];
 	}
 

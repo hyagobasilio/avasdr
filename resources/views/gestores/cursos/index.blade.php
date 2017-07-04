@@ -14,20 +14,15 @@
 <br>
 <div class="row">
   <div class="col_md_12">
-    <table id="table" class="table table-striped table-hover">
+    <table id="table-data" class="table table-striped table-hover">
       <thead>
         <tr>
+          <th>Código</th>
           <th>Nome</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($cursos as $curso)
-        <tr>
-          <td>{{$curso->nome}}</td>
-          <td><a href="{{ url('gestor/cursos/'.$curso->id.'/edit') }}">Editar</a></td>
-        </tr>
-        @endforeach
       </tbody>
     </table>
 
