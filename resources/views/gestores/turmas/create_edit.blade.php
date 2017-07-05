@@ -1,90 +1,107 @@
 @extends('layouts.gestor.template')
 
+@section('head')
+<link rel="stylesheet" href="/tema/vendors/clockpicker/src/clockpicker.css">
+<link rel="stylesheet" href="/tema/vendors/clockpicker/src/standalone.css">
+@endsection
 @section('content')
 
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Cadastro <small>Turma</small></h2>
+        <h2>Cadastro turma</h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
         <br>
-        <form class="form-horizontal form-label-left" method="post"
-        	action="@if (isset($turma)){{ url('gestor/turmas/' . $turma->id . '/edit') }}@endif"
-        	autocomplete="off">
-            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-
-
-            <!-- Curso -->
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ano">Curso<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                {!! Form::select('estagio_educacional',$estagiosEducacionais, null, ['class' => 'form-control', 'id' => 'estagio_educacional']) !!}
-                {{ $errors->first('ano', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") }}
-              </div>
-            </div>
+        @if (isset($turma))
+          {!! Form::model($turma, array('url' => url('gestor/turmas/' . $turma->id ), 'method' => 'put', 'class' => 'form-horizontal form-label-left', 'files'=> true)) !!}
+        @else
+          {!! Form::open(array('url' => url('gestor/turmas'), 'method' => 'post', 'class' => 'form-horizontal bf', 'files'=> true)) !!}
+        @endif
+            
             <!-- Nome -->
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nome">Nome<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="nome" name="nome" required="required" data-validate-length-range="6" data-validate-words="2" class="form-control col-md-7 col-xs-12" value="{{{ old('nome', isset($turma) ? $turma->nome : null) }}}">
-                {{ $errors->first('name', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") }}
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ano">Ano<span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="number" id="ano" min="2000" name="ano" required="required" class="form-control col-md-7 col-xs-12" value="{{{ old('ano', isset($turma) ? $turma->ano : null) }}}">
-                {{ $errors->first('ano', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") }}
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Custom</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="select2_single form-control" tabindex="-1">
-                  <option></option>
-                  <option value="AK">Alaska</option>
-                  <option value="HI">Hawaii</option>
-                  <option value="CA">California</option>
-                  <option value="NV">Nevada</option>
-                  <option value="OR">Oregon</option>
-                  <option value="WA">Washington</option>
-                  <option value="AZ">Arizona</option>
-                  <option value="CO">Colorado</option>
-                  <option value="ID">Idaho</option>
-                  <option value="MT">Montana</option>
-                  <option value="NE">Nebraska</option>
-                  <option value="NM">New Mexico</option>
-                  <option value="ND">North Dakota</option>
-                  <option value="UT">Utah</option>
-                  <option value="WY">Wyoming</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="IL">Illinois</option>
-                  <option value="IA">Iowa</option>
-                  <option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option>
-                  <option value="LA">Louisiana</option>
-                  <option value="MN">Minnesota</option>
-                  <option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="SD">South Dakota</option>
-                  <option value="TX">Texas</option>
-                </select>
+                  {!! Form::text('nome', null, ['class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Ex.: 6º B']) !!}
+                {!! $errors->first('nome', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
               </div>
             </div>
 
+            <!-- Curso -->
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">Ativo<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="curso_id">Curso<span class="required">*</span>
+              </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="ativo" name="ativo" type="checkbox" data-on="Ativo" data-off="Desativo" checked data-toggle="toggle">
+                {!! Form::select('curso_id',$cursos, null, ['class' => 'form-control', 'id' => 'curso_id']) !!}
+                {!! $errors->first('curso_id', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
               </div>
             </div>
+            <!-- Série -->
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="serie_id">Série<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                {!! Form::select('serie_id',[], null, ['class' => 'form-control', 'id' => 'serie_id']) !!}
+                {!! $errors->first('serie_id', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
+              </div>
+            </div>
+            <!-- Matriz -->
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="serie_id">Matriz<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                {!! Form::select('matriz_id',[], null, ['class' => 'form-control', 'id' => 'matriz_id']) !!}
+                {!! $errors->first('matriz_id', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
+              </div>
+            </div>
+            
+            <!-- Turnos -->
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="turno_id">Turno<span class="required">*</span>
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                {!! Form::select('turno_id',$turnos, null, ['class' => 'form-control', 'id' => 'turno_id']) !!}
+                {!! $errors->first('turno_id', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
+              </div>
+            </div>
+
+            <!-- Hora Início -->
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hora_inicio">Hora início<span class="required">*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-12">
+
+                <div class="input-group clockpicker">
+                  {!! Form::text('hora_inicio', null, ['class' => 'hora form-control', 'placeholder' => '00:00' ]) !!}
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </span>
+                </div>
+                  
+                {!! $errors->first('hora_inicio', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
+              </div>
+            </div>
+
+            <!-- Hora Final -->
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="hora_fim">Hora final<span class="required">*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-12">
+                
+                <div class="input-group clockpicker">
+                  {!! Form::text('hora_fim', null, ['class' => 'hora form-control', 'placeholder' => '00:00']) !!}
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </span>
+                </div>
+                {!! $errors->first('hora_fim', "<label class=\"control-label\" for=\"inputError\"\> :message </label>") !!}
+              </div>
+            </div>            
+
+
 
             <div class="ln_solid"></div>
             <div class="form-group">
@@ -104,12 +121,48 @@
 @stop
 
 @section('scripts')
+<script src="/tema/vendors/clockpicker/src/clockpicker.js"></script>
 <script type="text/javascript">
   $(function(){
-    $("#estagio_educacional").select2({});
-    $(".select2_single").select2({
-      placeholder: "Select a state",
-      allowClear: true
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Feito',
+        autoclose: true
+    });
+
+    $("#curso_id").on('change', function () {
+      var idCurso = this.value;
+      $('#serie_id').empty();
+      $('#matriz_id').empty();
+      if(idCurso != "") {
+        $.ajax({
+          dataType: "json",
+          url: "/gestor/turmas/series/curso/?".replace("?", idCurso),
+          success: function(dados) {
+            $.each( dados, function(index, value) {
+              $('<option>', {
+                value: value.id,
+                html: value.nome
+              }).appendTo('#serie_id');
+            });
+          }
+        });
+
+        $.ajax({
+          dataType: "json",
+          url: "/gestor/turmas/matrizes/curso/?".replace("?", idCurso),
+          success: function(dados) {
+            $.each( dados, function(index, value) {
+              $('<option>', {
+                value: value.id,
+                html: value.nome
+              }).appendTo('#matriz_id');
+            });
+          }
+        });
+      }
+
     });
 
   });

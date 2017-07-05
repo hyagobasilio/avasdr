@@ -20,14 +20,32 @@
             <thead>
             <tr>
                 <th>Nome</th>
-                <th>Ações</th>
+                <th>Curso</th>
+                <th>Série</th>
+                <th>Matriz</th>
+                <th>Turno</th>
+                <th>Hr Início</th>
+                <th>Hr Fim</th>
+                <th>Data Criação</th>
+                <th>#</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($turmas as $turma)
                 <tr>
                     <td>{{$turma->nome}}</td>
-                    <td>{{$turma->id}}</td>
+                    <td>{{$turma->serie->curso->nome}}</td>
+                    <td>{{$turma->serie->nome}}</td>
+                    <td>{{$turma->matriz->nome}}</td>
+                    <td>{{$turma->turno->nome}}</td>
+                    <td>{{$turma->hora_inicio}}</td>
+                    <td>{{$turma->hora_fim}}</td>
+                    <td>{{$turma->created_at}}</td>
+                    <td>
+                        <a href="/gestor/turmas/{{$turma->id}}/matricula" class=" btn btn-sm btn-info">Matricular aluno</a>
+                        <a href="/gestor/turmas/{{$turma->id}}/edit"><i class="fa fa-edit"></i> Editar</a>
+                        <a href="/gestor/turmas/{{$turma->id}}/delete"><i class="fa fa-trash"></i> Excluir</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -38,22 +56,8 @@
 
 {{-- Scripts --}}
 @section('scripts')
-    @parent
-    <script type="text/javascript">
-
-        var oTable;
-        $(document).ready(function () {
-            oTable = $('#table').DataTable({
-                "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-                "sPaginationType": "full_numbers",
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{{ URL::to('admin/turmas/data/') }}",
-
-            });
-        });
+<script type="text/javascript">
 
 
-
-    </script>
+</script>
 @endsection

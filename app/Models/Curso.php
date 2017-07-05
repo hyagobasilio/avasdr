@@ -17,4 +17,9 @@ class Curso extends Model
     {
       return $this->hasMany('App\Models\Serie');
     }
+
+    public function matrizes()
+    {
+      return $this->hasMany('App\Models\Matriz');
+    }
 }

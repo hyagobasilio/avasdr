@@ -84,12 +84,17 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     Route::get('materias/{materia}/edit', 'Gestor\MateriaController@edit');
 
     # Turmas
+    Route::post('turmas', 'Gestor\TurmaController@store');
     Route::get('turmas', 'Gestor\TurmaController@index');
     Route::get('turmas/data', 'Gestor\TurmaController@data');
-    Route::get('turmas/create', 'Gestor\TurmaController@getCreate');
-    Route::post('turmas/create', 'Gestor\TurmaController@postCreate');
-    Route::post('turmas/{id}/edit', 'Gestor\TurmaController@postEdit');
-    Route::get('turmas/{id}/edit', 'Gestor\TurmaController@getEdit');
+    Route::get('turmas/create', 'Gestor\TurmaController@create');
+    Route::put('turmas/{turma}', 'Gestor\TurmaController@update');
+    Route::get('turmas/{turma}/edit', 'Gestor\TurmaController@edit');
+    Route::get('turmas/series/curso/{curso}', 'Gestor\TurmaController@getSeriesByCurso');
+    Route::get('turmas/{turma}', 'Gestor\TurmaController@show');
+    
+    # Matricula
+    Route::get('turmas/{turma}/matricula', 'Gestor\TurmaController@edit');
 
     # Relacionamento Alunos turma
     Route::get('alunos-turma', 'Gestor\AlunoTurmaController@index');

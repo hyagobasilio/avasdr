@@ -220,6 +220,13 @@
         });
 
         $('.data').inputmask("99/99/9999");
+        $('.hora').inputmask("99:99", {
+              placeholder: "00:00", 
+              insertMode: false, 
+              showMaskOnHover: false,
+              hourFormat: 12
+            }
+         );
         $('.cpf').inputmask({mask:"99999999999", placeholder: "" });
         $('.data-calendario').daterangepicker({
               "format": "DD/MM/YYYY",

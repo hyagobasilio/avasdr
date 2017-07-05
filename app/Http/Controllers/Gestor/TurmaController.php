@@ -2,7 +2,8 @@
 namespace App\Http\Controllers\Gestor;
 
 use App\Models\Turma;
-use App\Models\EstagioEducacional;
+use App\Models\Curso;
+use App\Models\Turno;
 use App\Http\Requests\Gestor\TurmaEditRequest;
 use App\Http\Requests\Gestor\TurmaRequest;
 use App\Http\Requests\Gestor\DeleteRequest;
@@ -10,6 +11,8 @@ use Datatables;
 use App\Http\Controllers\Controller;
 
 class TurmaController extends Controller {
+
+    public function __construct(){}
     /*
     * Display a listing of the resource.
     *
@@ -26,26 +29,27 @@ class TurmaController extends Controller {
      *
      * @return Response
      */
-    public function getCreate() {
-        $estagiosEducacionais = EstagioEducacional::pluck('nome', 'id')->prepend('Selecione');
-        return view('gestores.turmas.create_edit', compact('estagiosEducacionais'));
+    public function create()
+    {
+        $cursos = Curso::pluck('nome', 'id')->prepend('Selecione');
+        $turnos = Turno::pluck('nome', 'id')->prepend('Selecione');
+        return view('gestores.turmas.create_edit', compact('cursos', 'turnos'));
+    }
+
+    public function show(Turma $turma)
+    {
+        return view('gestores.turmas.show', compact('turma'));
     }
     /**
      * Store a newly created resource in storage.
      *
      * @return Response
      */
-    public function postCreate(TurmaRequest $request) {
+    public function store(TurmaRequest $request)
+    {
+        Turma::create($request->all());
 
-        dd($request->all());
-        $turma = new Turma();
-        $turma->nome = $request->nome;
-        $turma->ativo = $request->has('ativo');
-
-
-        if($turma->save()) {
-            return redirect("/gestor/turmas");
-        }
+        return redirect("/gestor/turmas");
     }
     /**
      * Show the form for editing the specified resource.
@@ -53,9 +57,11 @@ class TurmaController extends Controller {
      * @param $turma
      * @return Response
      */
-    public function getEdit($id) {
-        $turma = Turma::find($id);
-        return view('gestores.turmas.create_edit', compact('turma'));
+    public function edit(Turma $turma)
+    {
+        $cursos = Curso::pluck('nome', 'id')->prepend('Selecione');
+        $turnos = Turno::pluck('nome', 'id')->prepend('Selecione');
+        return view('gestores.turmas.create_edit', compact('turma', 'cursos', 'turnos'));
     }
     /**
      * Update the specified resource in storage.
@@ -63,14 +69,11 @@ class TurmaController extends Controller {
      * @param $turma
      * @return Response
      */
-    public function postEdit(TurmaEditRequest $request, $id) {
-        $turma = Turma::find($id);
-        $turma->nome = $request->nome;
-        $turma->ativo = $request->has('ativo');
+    public function update(TurmaRequest $request, Turma $turma)
+    {
+        $turma->update($request->all());
 
-        if($turma->save()) {
-            return redirect("/gestor/turmas/$id/edit");
-        }
+        return redirect("/gestor/turmas");
     }
     /**
      * Remove the specified resource from storage.
@@ -78,11 +81,10 @@ class TurmaController extends Controller {
      * @param $turma
      * @return Response
      */
-    public function getDelete($id)
+    public function delete(Turma $turma)
     {
-        $turma = Turma::find($id);
         // Show the page
-        return view('gestores.turmas.delete', compact('user'));
+        return view('gestores.turmas.delete', compact('turma'));
     }
     /**
      * Remove the specified resource from storage.
@@ -90,9 +92,8 @@ class TurmaController extends Controller {
      * @param $turma
      * @return Response
      */
-    public function postDelete(DeleteRequest $request,$id)
+    public function destroy(Turma $turma)
     {
-        $turma= Turma::find($id);
         $turma->delete();
     }
     /**
@@ -109,5 +110,14 @@ class TurmaController extends Controller {
                ')
             ->remove_column('id')
             ->make();
+    }
+
+    public function getSeriesByCurso(Curso $curso)
+    {
+        return $curso->series;
+    }
+    public function getMatrizesByCurso(Curso $curso)
+    {
+        return $curso->matrizes;
     }
 }

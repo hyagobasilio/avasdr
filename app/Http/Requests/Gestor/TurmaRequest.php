@@ -12,8 +12,12 @@ class TurmaRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-                    'nome' 		=> 'required|min:3',
-                    'ativo' 		=> 'required'
+      'nome' 						=> 'required|min:2',
+      'turno_id' 				=> 'required',
+      'serie_id' 				=> 'required',
+      'hora_inicio' 		=> 'required',
+      'hora_fim' 				=> 'required',
+      'matriz_id' 				=> 'required',
 		];
 	}
 
