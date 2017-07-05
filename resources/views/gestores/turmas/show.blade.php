@@ -18,7 +18,7 @@
             <tbody>
               <tr>
                 <th style="width:50%">Curso:</th>
-                <td>{{ $turma->serie->curso->nome }}</td>
+                <td>{{ $turma->serie->curso->nome }} <br> {{ $turma->serie->curso->carga_horaria }}h</td>
               </tr>
               <tr>
                 <th>Série:</th>
@@ -102,6 +102,7 @@
                   <tr>
                     <th>Código</th>
                     <th>Nome</th>
+                    <th>Carga Horária</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,6 +110,7 @@
                   <tr>
                     <td>{{$item->materia->codigo}}</td>
                     <td>{{$item->materia->nome}}</td>
+                    <td>{{$item->carga_horaria}}</td>
                   </tr>
                   @endforeach
                 </tbody>
