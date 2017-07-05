@@ -26,7 +26,6 @@
                 <th>Turno</th>
                 <th>Hr Início</th>
                 <th>Hr Fim</th>
-                <th>Data Criação</th>
                 <th>#</th>
             </tr>
             </thead>
@@ -40,7 +39,6 @@
                     <td>{{$turma->turno->nome}}</td>
                     <td>{{$turma->hora_inicio}}</td>
                     <td>{{$turma->hora_fim}}</td>
-                    <td>{{$turma->created_at}}</td>
                     <td>
                         <a href="/gestor/turmas/{{$turma->id}}/matricula" class=" btn btn-sm btn-info">Matricular aluno</a>
                         <a href="/gestor/turmas/{{$turma->id}}/edit"><i class="fa fa-edit"></i> Editar</a>
