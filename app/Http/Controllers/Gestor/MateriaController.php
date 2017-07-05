@@ -32,7 +32,7 @@ class MateriaController extends Controller {
    *
    * @return Response
    */
-  public function getCreate() {
+  public function create() {
       return view('gestores.materias.create_edit');
   }
   /**

@@ -40,7 +40,7 @@
                     <td>{{$turma->hora_inicio}}</td>
                     <td>{{$turma->hora_fim}}</td>
                     <td>
-                        <a href="/gestor/turmas/{{$turma->id}}/matricula" class=" btn btn-sm btn-info">Matricular aluno</a>
+                        <a href="/gestor/turmas/{{$turma->id}}"><i class="fa fa-eyes"></i>Visualizar</a>
                         <a href="/gestor/turmas/{{$turma->id}}/edit"><i class="fa fa-edit"></i> Editar</a>
                         <a href="/gestor/turmas/{{$turma->id}}/delete"><i class="fa fa-trash"></i> Excluir</a>
                     </td>

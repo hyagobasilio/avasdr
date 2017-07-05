@@ -78,7 +78,7 @@ Route::group(['middleware' =>  'auth:gestor', 'prefix' => 'gestor'], function(){
     #Materias
     Route::get('materias', 'Gestor\MateriaController@index');
     Route::get('materias/data', 'Gestor\MateriaController@data');
-    Route::get('materias/create', 'Gestor\MateriaController@getCreate');
+    Route::get('materias/create', 'Gestor\MateriaController@create');
     Route::post('materias', 'Gestor\MateriaController@store');
     Route::put('materias/{materia}/edit', 'Gestor\MateriaController@update');
     Route::get('materias/{materia}/edit', 'Gestor\MateriaController@edit');
