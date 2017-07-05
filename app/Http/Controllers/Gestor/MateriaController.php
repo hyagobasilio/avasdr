@@ -16,6 +16,7 @@ class MateriaController extends Controller {
   {
     view()->share('type', 'materias');
   }
+
   /*
   * Display a listing of the resource.
   *
@@ -42,7 +43,7 @@ class MateriaController extends Controller {
    */
   public function store(MateriaRequest $request)
   {
-    $materia = Materia::create($request->all());S
+    $materia = Materia::create($request->all());
     return redirect("/gestor/materias");
   }
   /**
